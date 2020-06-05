@@ -5,14 +5,13 @@ import java.io.IOException;
 import it.unicam.cs.pa.jbudget100763.view.View;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class App extends Application implements View {
-	private Stage primaryStage;
-	private BorderPane mainLayout;
+	private static  Stage primaryStage;
+	private static  BorderPane mainLayout;
 
 	
 	@Override
@@ -20,22 +19,40 @@ public class App extends Application implements View {
 		this.primaryStage = stage;
 		this.primaryStage.setTitle("JBudget");
 		
-		showMainView();
+		showHome();
+
 	}
 		
 		
-		private void showMainView() throws IOException {
+		public static void showHome() throws IOException {
 		
-		mainLayout=(BorderPane)FXMLLoader.load(getClass().getResource("/Home.fxml"));
+		mainLayout=(BorderPane)FXMLLoader.load(App.class.getResource("/Home.fxml"));
 		primaryStage.setScene(new Scene(mainLayout));
 		primaryStage.show();
 	}
 
-	public void showStart() throws IOException {
+	public static void showStart() throws IOException {
+		/*
+		FXMLLoader loader= new FXMLLoader();
+		loader.setLocation(getClass().getResource("/Start.fxml"));
+		BorderPane start=loader.load();
+		mainLayout.setCenter(start);
+		primaryStage.setScene(new Scene(mainLayout));
+		primaryStage.show();
+		*/
+		
+		/*
 		BorderPane root=(BorderPane)FXMLLoader.load(getClass().getResource("/Start.fxml"));
 		mainLayout.setCenter(root);
 		primaryStage.setScene(new Scene(mainLayout));
 		primaryStage.show();
+		*/
+
+		mainLayout=FXMLLoader.load(App.class.getResource("/Ledger.fxml"));
+		primaryStage.setScene(new Scene(mainLayout));
+
+	//	mainLayout.setCenter(pane);
+		
 	}
 	
 	//public static void s

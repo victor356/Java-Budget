@@ -5,12 +5,22 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 
 public class FxController {
-	private App main;
 	
 	@FXML
-	private void start() throws IOException {
-		main.showStart();
-	}
+    private void start() throws IOException {
+		App.showStart();
+    }
+	
+	@FXML
+    private void backHome() throws IOException {
+		App.showHome();
+    }
+	@FXML
+    private void newAccount() throws IOException {
+		App.showHome();
+    }
+	
+	
 	
 	
 }

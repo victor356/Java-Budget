@@ -13,16 +13,24 @@ public class MovementImpl implements Movement {
 	private Account account;
 	private int id;
 	private Date date;
-	List<Tag> tag=new ArrayList<Tag>();;
+	List<Tag> tag=new ArrayList<Tag>();
 
 	public MovementImpl(MovementType type,double amount,Transaction trans,Account account) {
 		this.type=type;
 		this.amount=amount;
 		this.transaction=trans;
-		this.account=account;
-
-		
+		this.account=account;		
 		transaction.addMovement(this);
+	}
+	public MovementImpl(MovementType ty, double amo, Date da, Tag t, String desc, Account acc, Transaction trans) {
+		type = ty;
+		amount = amo;
+		date = da;
+		tag.add(t);
+		description = desc;
+		account = acc;
+		transaction = trans;
+		
 	}
 	public String getDescription() {
 		return this.description;
@@ -94,15 +102,5 @@ public class MovementImpl implements Movement {
 		this.tag.remove(t);
 	}
 
-	public MovementImpl(MovementType ty, double amo, Date da, Tag t, String desc, Account acc, Transaction trans) {
-		type = ty;
-		amount = amo;
-		date = da;
-		tag.add(t);
-		description = desc;
-		account = acc;
-		transaction = trans;
-
-	}
 
 }

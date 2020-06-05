@@ -1,5 +1,6 @@
 package it.unicam.cs.pa.jbudget100763.model;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -34,7 +35,7 @@ public class BudgetReportImpl implements BudgetReport {
 
 	@Override
 	public Map<Tag, Double> report() {
-		Map<Tag, Double> report = Map.of();		//ottenere tag distinti ed il loro totale
+		Map<Tag, Double> report = new HashMap<Tag, Double>(); // ottenere tag distinti ed il loro totale
 
 		for (Tag ta : tags()) {
 			report.putIfAbsent(ta, getBalance(ta));	//calcolare il bilancio di ogni tag

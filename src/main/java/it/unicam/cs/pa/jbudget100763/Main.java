@@ -22,6 +22,7 @@ public class Main extends Application{
 		btn1.setOnAction(this::doSomething);
 		
 		
+		
 		StackPane root= new StackPane();
 		root.getChildren().add(btn1);  //layout
 		

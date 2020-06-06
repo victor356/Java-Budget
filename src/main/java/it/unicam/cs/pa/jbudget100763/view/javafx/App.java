@@ -38,7 +38,18 @@ public class App extends Application implements View {
 	
 	public static void manageAccount() throws IOException {
 
-		mainLayout = FXMLLoader.load(App.class.getResource("/ManageAccount.fxml"));
+		mainLayout = FXMLLoader.load(App.class.getResource("/AccountSettings.fxml"));
+		Stage addDialogStage= new Stage();
+		addDialogStage.setTitle("Account Settings");
+		addDialogStage.initModality(Modality.WINDOW_MODAL);
+		addDialogStage.initOwner(primaryStage);
+		addDialogStage.setScene(new Scene(mainLayout));
+		addDialogStage.showAndWait();
+	}
+	
+	public static void createAccount() throws IOException {
+
+		mainLayout = FXMLLoader.load(App.class.getResource("/newAccount.fxml"));
 		Stage addDialogStage= new Stage();
 		addDialogStage.setTitle("Add New Account");
 		addDialogStage.initModality(Modality.WINDOW_MODAL);

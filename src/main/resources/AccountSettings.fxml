@@ -21,7 +21,7 @@
    <bottom>
       <HBox alignment="CENTER" prefHeight="45.0" prefWidth="600.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
-          <Button mnemonicParsing="false"  prefWidth="80.0" text="Add" />
+          <Button mnemonicParsing="false" onAction="#createAccount" prefWidth="80.0" text="New" />
          </children>
       </HBox>
    </bottom>

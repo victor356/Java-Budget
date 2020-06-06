@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import it.unicam.cs.pa.jbudget100763.model.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class LedgerImpl implements Ledger {
 
@@ -17,6 +19,7 @@ public class LedgerImpl implements Ledger {
 	static List<Account> accounts = new ArrayList<Account>();
 	static List<Tag> tags = new ArrayList<Tag>();
 	static ScheduledTransaction scheduled = new ScheduledTransactionImpl();
+	public static ObservableList<Account> list=FXCollections.observableArrayList();
 	/*
 	 * private LedgerImpl(List<Transaction> transactions,List<Account>
 	 * accounts,List<Tag> tags) { LedgerImpl.transactions=List.of();

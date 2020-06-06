@@ -117,7 +117,7 @@ public class App extends Application implements View {
  * new EventHandler<MouseEvent>() { private boolean flag = true;
  * 
  * @Override public void handle(MouseEvent e) { if(!e.isShiftDown()) {
- * System.out.println("è necessario premere shift e cliccare"); }else {
+ * System.out.println("ï¿½ necessario premere shift e cliccare"); }else {
  * 
  * if (flag) { circle.setFill(Color.AZURE); flag = !flag; } else {
  * circle.setFill(Color.RED); flag = !flag; } }} }; // Registering the event

@@ -16,8 +16,8 @@ public class FxController {
 		App.showHome();
     }
 	@FXML
-    private void newAccount() throws IOException {
-		App.showHome();
+    private void manageAccount() throws IOException {
+		App.manageAccount();
     }
 	
 	

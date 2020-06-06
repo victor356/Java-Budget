@@ -16,10 +16,10 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Button layoutX="70.0" layoutY="94.0" mnemonicParsing="false" text="My Account" AnchorPane.bottomAnchor="241.0" AnchorPane.leftAnchor="70.0" />
-            <Button layoutX="461.0" layoutY="118.0" mnemonicParsing="false" text="Manage Transactions" AnchorPane.bottomAnchor="241.0" AnchorPane.rightAnchor="65.0" />
-            <Button layoutX="66.0" layoutY="264.0" mnemonicParsing="false" text="Manage Tags" AnchorPane.bottomAnchor="71.0" AnchorPane.leftAnchor="66.0" />
-            <Button layoutX="438.0" layoutY="264.0" mnemonicParsing="false" text="Schedule" AnchorPane.bottomAnchor="71.0" AnchorPane.rightAnchor="97.0" />
+            <Button layoutX="70.0" layoutY="94.0" mnemonicParsing="false" onAction="#manageAccount" text="Manage Account" AnchorPane.bottomAnchor="241.0" AnchorPane.leftAnchor="70.0" />
+            <Button layoutX="372.0" layoutY="94.0" mnemonicParsing="false" text="Manage Transactions" AnchorPane.bottomAnchor="241.0" AnchorPane.rightAnchor="99.0" />
+            <Button layoutX="80.0" layoutY="264.0" mnemonicParsing="false" text="Manage Tags" AnchorPane.bottomAnchor="71.0" AnchorPane.leftAnchor="80.0" />
+            <Button layoutX="438.0" layoutY="264.0" mnemonicParsing="false" text="Schedule Transactions" AnchorPane.bottomAnchor="71.0" AnchorPane.rightAnchor="97.0" />
          </children>
       </AnchorPane>
    </center>

@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 
-<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicam.cs.pa.jbudget100763.view.javafx.FxController">
    <center>
       <AnchorPane prefHeight="400.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
@@ -21,7 +21,7 @@
    <bottom>
       <HBox alignment="CENTER" prefHeight="45.0" prefWidth="600.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
-          <Button mnemonicParsing="false" onAction="#newAccount" prefWidth="60.0" text="Add" />
+          <Button mnemonicParsing="false"  prefWidth="80.0" text="Add" />
          </children>
       </HBox>
    </bottom>

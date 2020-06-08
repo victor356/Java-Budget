@@ -115,7 +115,7 @@ public class LedgerImpl implements Ledger {
 	}
 
 	/**
-	 * Aggiunge la Sch.Tran. alla lista
+	 * Aggiunge l'istanza Sch.Tran. alla lista "contenitore" dell'applicazione presente nel ledger
 	 * 
 	 * @param st - Scheduled Transaction
 	 * 

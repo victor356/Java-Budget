@@ -9,8 +9,8 @@ import java.util.List;
  * Permette di accedere e modificare le informazioni associate al movimento:
  * descrizione, importo, account associato, lista dei tag associati al
  * movimento. Le operazioni di lettura e modifica di queste operazioni vengono
- * effettuate per mezzo degli opportuni getter e setter. I movimento è associato
- * ad una transazione a cui deriva la data. I tag inseriti nei movimenti vengono
+ * effettuate per mezzo degli opportuni getter e setter. Il movimento è associato
+ * ad una transazione da cui deriva la data. I tag inseriti nei movimenti vengono
  * raccolti senza ripetersi dalla transazione, i tag aggiunti alla transazione
  * vengono distribuiti a tutti i movimenti a lei associati
  * 

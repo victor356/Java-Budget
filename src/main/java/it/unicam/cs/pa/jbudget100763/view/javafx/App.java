@@ -16,7 +16,7 @@ import javafx.stage.Stage;
  * @author Vittorio
  *
  */
-public class App extends Application implements View {
+public class App extends Application  {
 	private static Stage primaryStage;
 	private static BorderPane mainLayout;
 

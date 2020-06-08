@@ -13,11 +13,16 @@ import it.unicam.cs.pa.jbudget100763.model.AccountType;
 import it.unicam.cs.pa.jbudget100763.model.LedgerImpl;
 import it.unicam.cs.pa.jbudget100763.model.Tag;
 import it.unicam.cs.pa.jbudget100763.model.TagImpl;
+import it.unicam.cs.pa.jbudget100763.view.View;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
@@ -29,7 +34,7 @@ import javafx.stage.Stage;
  * @author Vittorio
  *
  */
-public class FxController implements Initializable {
+public class FxController implements Initializable,View {
 
 	Controller controller = new Controller();
 
@@ -44,12 +49,13 @@ public class FxController implements Initializable {
 	}
 
 	@FXML
-	private void manageAccount() throws IOException {
+	public
+	 void manageAccount() throws IOException {
 		App.manageAccount();
 	}
 
 	@FXML
-	private void createAccount() throws IOException {
+	public void createAccount() throws IOException {
 		App.createAccount();
 	}
 
@@ -144,7 +150,7 @@ public class FxController implements Initializable {
 	}
 
 	@FXML
-	private void deleteAccount() {
+	public void deleteAccount() {
 		controller.getAccounts().removeIf(o -> o == accountTable.getSelectionModel().getSelectedItem());
 		accountTable.getItems().removeAll(accountTable.getSelectionModel().getSelectedItem());
 
@@ -166,13 +172,13 @@ public class FxController implements Initializable {
 	 * tag table management
 	 */
 	@FXML
-	private void manageTag() throws IOException {
+	public void manageTag() throws IOException {
 		App.manageTag();
 
 	}
 
 	@FXML
-	private void createTag() throws IOException {
+	public void createTag() throws IOException {
 		App.createTag();
 	}
 

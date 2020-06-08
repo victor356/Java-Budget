@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"it.unicam.cs.pa.jbudget100763.view.javafx"}]
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"it.unicam.cs.pa.jbudget100763"},{"l":"it.unicam.cs.pa.jbudget100763.controller"},{"l":"it.unicam.cs.pa.jbudget100763.model"},{"l":"it.unicam.cs.pa.jbudget100763.view"},{"l":"it.unicam.cs.pa.jbudget100763.view.javafx"}]

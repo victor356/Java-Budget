@@ -28,11 +28,6 @@ public class AccountImpl implements Account {
 		this.description = description2;
 
 	}
-	public static ObservableList<Account> list=FXCollections.observableArrayList(
-        new AccountImpl(AccountType.ASSETS,"pippo",23,"ci si prova"),
-		new AccountImpl(AccountType.CASH,"minni",53,"ci si prova")
-        
-    );
 
 	public double getBalance() {
 		for (Transaction t: ledger.getTransactions()) {

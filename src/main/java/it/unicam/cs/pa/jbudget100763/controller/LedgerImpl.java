@@ -15,11 +15,11 @@ public class LedgerImpl implements Ledger {
 	// HashMap<AccountType, String, String , Double> accountDb = new
 	// HashMap<AccountType , String , String , Double>();
 	// HashMap<String, String> tagdb= new Hashmap<String, String>();
-	static List<Transaction> transactions = new ArrayList<Transaction>();
-	static List<Account> accounts = new ArrayList<Account>();
-	static List<Tag> tags = new ArrayList<Tag>();
-	static ScheduledTransaction scheduled = new ScheduledTransactionImpl();
-	public static ObservableList<Account> list=FXCollections.observableArrayList();
+	 List<Transaction> transactions = new ArrayList<Transaction>();
+	 List<Account> accounts = new ArrayList<Account>();
+	 List<Tag> tags = new ArrayList<Tag>();
+	 ScheduledTransaction scheduled = new ScheduledTransactionImpl();
+//	public static ObservableList<Account> accounts=FXCollections.observableArrayList();
 	/*
 	 * private LedgerImpl(List<Transaction> transactions,List<Account>
 	 * accounts,List<Tag> tags) { LedgerImpl.transactions=List.of();

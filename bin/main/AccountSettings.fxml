@@ -11,7 +11,7 @@
    <center>
       <AnchorPane prefHeight="400.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <TableView fx:id="accountTable" layoutX="14.0" prefHeight="400.0" prefWidth="650.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="-14.0" AnchorPane.topAnchor="0.0">
+            <TableView fx:id="accountTable" layoutX="14.0" prefHeight="400.0" prefWidth="650.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="0.0">
               <columns>
                 <TableColumn fx:id="AccountName" prefWidth="119.20001220703125" text="Name" />
                 <TableColumn fx:id="AccountDesc" prefWidth="191.20001220703125" text="Description" />

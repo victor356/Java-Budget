@@ -57,6 +57,26 @@ public class App extends Application implements View {
 		addDialogStage.setScene(new Scene(mainLayout));
 		addDialogStage.showAndWait();
 	}
+	public static void manageTag() throws IOException {
+
+		mainLayout = FXMLLoader.load(App.class.getResource("/TagSettings.fxml"));
+		Stage addDialogStage= new Stage();
+		addDialogStage.setTitle("Tag Settings");
+		addDialogStage.initModality(Modality.WINDOW_MODAL);
+		addDialogStage.initOwner(primaryStage);
+		addDialogStage.setScene(new Scene(mainLayout));
+		addDialogStage.showAndWait();
+	}
+	public static void createTag() throws IOException {
+
+		mainLayout = FXMLLoader.load(App.class.getResource("/newTag.fxml"));
+		Stage addDialogStage= new Stage();
+		addDialogStage.setTitle("Add New Tag");
+		addDialogStage.initModality(Modality.WINDOW_MODAL);
+		addDialogStage.initOwner(primaryStage);
+		addDialogStage.setScene(new Scene(mainLayout));
+		addDialogStage.showAndWait();
+	}
 	
 	
 	

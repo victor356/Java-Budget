@@ -1,21 +1,30 @@
 package it.unicam.cs.pa.jbudget100763.model;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashSet;
+import java.util.GregorianCalendar;
 import java.util.List;
 
-import it.unicam.cs.pa.jbudget100763.controller.LedgerImpl;
-
+/**
+ * ha la responsabilità  di gestire una transazione. Permette di accedere e
+ * modificare la informazioni associate ad una transazione: lista dei tag, data,
+ * movimenti. Un tag associato (o rimosso) ad una transazione viene aggiunto (o
+ * rimosso) ad ogni movimento della transazione. La transazione ha anche un
+ * saldo (ottenibile tramite il metodo getTotalAmount()) che permette di
+ * ottenere la somma totale dei movimenti interni alla transazione.
+ * 
+ * @author Vittorio
+ *
+ */
 public class TransactionImpl implements Transaction {
 
 	private int id;
 	private List<Movement> movements = new ArrayList<Movement>();
-	private List<Tag> tags = new ArrayList<Tag>();
-	private Date date;
+	private GregorianCalendar date;
 
+	/**
+	 * La classe viene inserita automaticamente nella lista del ledger
+	 */
 	public TransactionImpl() {
-
 		LedgerImpl.getInstance().addTransaction(this);
 	}
 
@@ -31,11 +40,11 @@ public class TransactionImpl implements Transaction {
 		return this.movements;
 	}
 
-	public Date getDate() {
+	public GregorianCalendar getDate() {
 		return this.date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(GregorianCalendar date) {
 		this.date = date;
 	}
 
@@ -49,24 +58,32 @@ public class TransactionImpl implements Transaction {
 		movements.remove(m);
 	}
 
-	public List<Tag> getTags() { // get the distinct tags of every mov
-		HashSet<Tag> temp = new HashSet<Tag>();
-		for (Movement m : movements) { // for every mov
+	/**
+	 * @return Get a distinct tags list from all the movements
+	 */
+	public List<Tag> getTags() {
+		List<Tag> tags = new ArrayList<Tag>();
 
-			temp.addAll(m.getTag()); // take all the distinct tags (hashSet works in this way)
-		}
-		this.tags.clear();
-		this.tags.addAll(temp); // put them in class list
-
-		return this.tags;
+		movements.parallelStream().forEach(mov -> {
+			mov.getTag().parallelStream().forEach(tag -> {
+				if (!tags.contains(tag))
+					tags.add(tag);
+			});
+		});
+		return tags;
 	}
 
+	/**
+	 * @param t - Tag da inserire a tutti i movimenti della transazione e
+	 *          automaticamente alla transazione stessa
+	 * 
+	 */
 	@Override
 	public void addTag(Tag t) {
-		for (Movement m : movements) { // add the tag in every mov of the trans if not already present,
-			if (!m.getTag().contains((Tag) t)) // AND in this list
+		movements.parallelStream().forEach(m -> {
+			if (!m.getTag().contains((Tag) t))
 				m.addTag(t);
-		}
+		});
 
 	}
 
@@ -78,6 +95,9 @@ public class TransactionImpl implements Transaction {
 		}
 	}
 
+	/**
+	 * @return somma algebrica del valore di tutti i movimenti contenuti
+	 */
 	@Override
 	public double getTotalAmount() {
 		double total = 0;

@@ -1,5 +1,6 @@
 package it.unicam.cs.pa.jbudget100763.model;
-/**Tag: ha la responsabilità di definire una categoria di spesa/guadagno.
+/**
+ * Ha la responsabilità di definire una categoria di conto.
  */
 public enum AccountType {
     ASSETS,

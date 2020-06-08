@@ -4,29 +4,29 @@ import java.util.List;
 import java.util.function.Predicate;
 
 /**
- * questa interfaccia √® implementata dalle classi che hanno la responsabilit√† di
- * gestire un conto. Permette di accedere e modificare le informazioni del
+ * questa interfaccia Ë implementata dalle classi che hanno la responsabilit‡†
+ * di gestire un conto. Permette di accedere e modificare le informazioni del
  * conto: descrizione, saldo iniziale, tipologia. Consente inoltre di ottenere
- * il saldo attuale. Inoltre, √® possibile accedere alla lista dei movimenti e
+ * il saldo attuale. Inoltre, Ë possibile accedere alla lista dei movimenti e
  * quelli che soddisfano un determinato predicato.
  */
 public interface Account {
-    String getName();
+	String getName();
 
-    String getDescription();
+	String getDescription();
 
-    int getId();
+	int getId();
 
-    double getOpeningBalance();
+	double getOpeningBalance();
 
-    double getBalance();
+	double getBalance();
 
-    List<Movement> getMovements();
+	List<Movement> getMovements();
 
-    List<Movement> getMovements(Predicate<Movement> p);
+	List<Movement> getMovements(Predicate<Movement> p);
 
-    AccountType getType();
+	AccountType getType();
 
-    void setType(AccountType a);
+	void setType(AccountType a);
 
 }

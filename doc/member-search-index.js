@@ -1,0 +1,1 @@
+memberSearchIndex = [{"p":"it.unicam.cs.pa.jbudget100763.view.javafx","c":"FxController","l":"FxController()","url":"%3Cinit%3E()"},{"p":"it.unicam.cs.pa.jbudget100763.view.javafx","c":"FxController","l":"initialize(URL, ResourceBundle)","url":"initialize(java.net.URL,java.util.ResourceBundle)"}]

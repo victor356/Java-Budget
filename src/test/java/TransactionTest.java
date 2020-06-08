@@ -1,11 +1,19 @@
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
-
-import java.util.Date;
-
-import it.unicam.cs.pa.jbudget100763.controller.*;
-import it.unicam.cs.pa.jbudget100763.model.*;
+import it.unicam.cs.pa.jbudget100763.model.Account;
+import it.unicam.cs.pa.jbudget100763.model.AccountType;
+import it.unicam.cs.pa.jbudget100763.model.Ledger;
+import it.unicam.cs.pa.jbudget100763.model.LedgerImpl;
+import it.unicam.cs.pa.jbudget100763.model.Movement;
+import it.unicam.cs.pa.jbudget100763.model.MovementImpl;
+import it.unicam.cs.pa.jbudget100763.model.MovementType;
+import it.unicam.cs.pa.jbudget100763.model.Tag;
+import it.unicam.cs.pa.jbudget100763.model.TagImpl;
+import it.unicam.cs.pa.jbudget100763.model.Transaction;
+import it.unicam.cs.pa.jbudget100763.model.TransactionImpl;
 
 public class TransactionTest {
 	Ledger l = LedgerImpl.getInstance();
@@ -15,7 +23,7 @@ public class TransactionTest {
 		Transaction trans = new TransactionImpl();
 		Tag t = new TagImpl("AUTO", "spese effettuate per manutenzione e uso dell'auto");
 		Account u = l.addAccount(AccountType.CASH, "Francesco", "prova", 100.0);
-		Movement m = new MovementImpl(MovementType.CREDIT, 200.60, trans, u);
+		Movement m = new MovementImpl(MovementType.INCOME, 200.60, trans, u);
 		assertFalse(trans.getMovements().isEmpty());
 
 		trans.removeMovement(m);
@@ -32,7 +40,7 @@ public class TransactionTest {
 		Tag t=l.addTag("AUTO", "spese effettuate per manutenzione e uso dell'auto");
 		Account u = l.addAccount(AccountType.CASH, "Francesco", "prova", 100.0);
 
-		Movement m = new MovementImpl(MovementType.CREDIT, 200.60, trans, u);
+		Movement m = new MovementImpl(MovementType.INCOME, 200.60, trans, u);
 
 		assertFalse(trans.getMovements().isEmpty()); // devono esserci movimenti
 		
@@ -55,7 +63,7 @@ public class TransactionTest {
 	l.addTag("AUTO", "spese effettuate per manutenzione e uso dell'auto");
 	Account u = l.addAccount(AccountType.CASH, "Francesco", "prova", 100.0);
 	String s = "AUTO";
-	Movement m = new MovementImpl(MovementType.CREDIT, 200.60, trans, u);
+	Movement m = new MovementImpl(MovementType.INCOME, 200.60, trans, u);
 	
 	trans.removeTag((Tag) l.getTags()
 			.stream()
@@ -73,9 +81,9 @@ public class TransactionTest {
 		Transaction trans = new TransactionImpl();
 		Account u = l.addAccount(AccountType.CASH, "Francesco", "prova", 100.0);
 
-		Movement m1 = new MovementImpl(MovementType.CREDIT, 100, trans, u);
-		Movement m2 = new MovementImpl(MovementType.CREDIT, 200.40, trans, u);
-		Movement m3 = new MovementImpl(MovementType.CREDIT, 700.60, trans, u);
+		Movement m1 = new MovementImpl(MovementType.INCOME, 100, trans, u);
+		Movement m2 = new MovementImpl(MovementType.INCOME, 200.40, trans, u);
+		Movement m3 = new MovementImpl(MovementType.INCOME, 700.60, trans, u);
 
 		double amount=trans.getTotalAmount();
 		assertTrue(amount==1001);

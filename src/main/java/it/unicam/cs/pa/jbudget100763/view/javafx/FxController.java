@@ -7,10 +7,10 @@ import java.util.EnumSet;
 import java.util.ResourceBundle;
 
 import it.unicam.cs.pa.jbudget100763.controller.Controller;
-import it.unicam.cs.pa.jbudget100763.controller.LedgerImpl;
 import it.unicam.cs.pa.jbudget100763.model.Account;
 import it.unicam.cs.pa.jbudget100763.model.AccountImpl;
 import it.unicam.cs.pa.jbudget100763.model.AccountType;
+import it.unicam.cs.pa.jbudget100763.model.LedgerImpl;
 import it.unicam.cs.pa.jbudget100763.model.Tag;
 import it.unicam.cs.pa.jbudget100763.model.TagImpl;
 import javafx.collections.FXCollections;
@@ -21,6 +21,14 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
+/**
+ * Ha la responsabilità di caricare le schermate da avviare e raccogliere tutte
+ * le interazioni dell'utente tramite la javaFX GUI e di inoltrarle al
+ * controller dell'applicazione
+ * 
+ * @author Vittorio
+ *
+ */
 public class FxController implements Initializable {
 
 	Controller controller = new Controller();
@@ -45,9 +53,9 @@ public class FxController implements Initializable {
 		App.createAccount();
 	}
 
-	// /**
-	// * View Account fields
-	// */
+	/**
+	 * Manage account fields
+	 */
 	@FXML
 	private TableView<Account> accountTable = new TableView<Account>();
 
@@ -65,8 +73,11 @@ public class FxController implements Initializable {
 	@FXML
 	private TableColumn<Account, Double> AccountB = new TableColumn<Account, Double>();
 
-	ObservableList<Account> accounts = FXCollections.observableArrayList(LedgerImpl.getInstance().getAccounts());
+	ObservableList<Account> accounts = FXCollections.observableArrayList(controller.getAccounts());
 
+	/**
+	 * Match delle colonne della tabella con gli attributi delle classi
+	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 
@@ -77,16 +88,15 @@ public class FxController implements Initializable {
 		AccountB.setCellValueFactory(new PropertyValueFactory<Account, Double>("balance"));
 		accountTable.getItems().addAll(accounts);
 		// tag
-		
+
 		tagName.setCellValueFactory(new PropertyValueFactory<Tag, String>("name"));
 		tagDescription.setCellValueFactory(new PropertyValueFactory<Tag, String>("description"));
 		tagTable.getItems().addAll(tags);
 	}
 
-	// /**
-	// * New Account tool fields
-	// */
-
+	/**
+	 * new account fields
+	 */
 	@FXML
 	private Button alertButton;
 
@@ -108,9 +118,9 @@ public class FxController implements Initializable {
 	ObservableList<AccountType> accountChoice = FXCollections
 			.observableArrayList(new ArrayList<AccountType>(EnumSet.allOf(AccountType.class)));
 
-	// /**
-	// * shows the account types on ChoiceBox
-	// */
+	/**
+	 * mostra i tipi di account nel choicebox
+	 */
 	@FXML
 	private void typeScroll() {
 		accountTypeField.setItems((ObservableList<AccountType>) accountChoice);
@@ -119,10 +129,13 @@ public class FxController implements Initializable {
 
 	@FXML
 	private void newAccount() {
-		 accountTable.getItems().add(new AccountImpl(accountTypeField.getValue(), accountNameField.getText(),
-		 		Double.parseDouble(accountOpeningBalanceField.getText()), accountDescriptionField.getText()));
-
-		LedgerImpl.getInstance().addAccount(accountTypeField.getValue(), accountNameField.getText(),
+		accountTable.getItems().add(new AccountImpl(accountTypeField.getValue(), accountNameField.getText(),
+				Double.parseDouble(accountOpeningBalanceField.getText()), accountDescriptionField.getText()));
+		// accounts.add(new AccountImpl(accountTypeField.getValue(),
+		// accountNameField.getText(),
+		// Double.parseDouble(accountOpeningBalanceField.getText()),
+		// accountDescriptionField.getText()));
+		controller.addAccount(accountTypeField.getValue(), accountNameField.getText(),
 				accountDescriptionField.getText(), Double.parseDouble(accountOpeningBalanceField.getText()));
 
 		Stage stage = (Stage) closeButton.getScene().getWindow();
@@ -132,8 +145,9 @@ public class FxController implements Initializable {
 
 	@FXML
 	private void deleteAccount() {
-		LedgerImpl.getInstance().getTags().removeIf(o->o==accountTable.getSelectionModel().getSelectedItem());
+		controller.getAccounts().removeIf(o -> o == accountTable.getSelectionModel().getSelectedItem());
 		accountTable.getItems().removeAll(accountTable.getSelectionModel().getSelectedItem());
+
 	}
 
 	/**
@@ -141,15 +155,15 @@ public class FxController implements Initializable {
 	 */
 	@FXML
 	private void closeButtonAction() {
-		// get a handle to the stage
+
 		Stage stage = (Stage) closeButton.getScene().getWindow();
 		stage.close();
 	}
 
-	ObservableList<Tag> tags = FXCollections.observableArrayList(LedgerImpl.getInstance().getTags());
+	ObservableList<Tag> tags = FXCollections.observableArrayList(controller.getTags());
 
 	/**
-	 * tag table
+	 * tag table management
 	 */
 	@FXML
 	private void manageTag() throws IOException {
@@ -163,7 +177,7 @@ public class FxController implements Initializable {
 	}
 
 	@FXML
-	private TableView<Tag> tagTable= new TableView<Tag>();
+	private TableView<Tag> tagTable = new TableView<Tag>();
 
 	@FXML
 	private TableColumn<Tag, String> tagName = new TableColumn<Tag, String>();
@@ -193,45 +207,8 @@ public class FxController implements Initializable {
 
 	@FXML
 	private void deleteTag() {
-		LedgerImpl.getInstance().getTags().removeIf(o->o==tagTable.getSelectionModel().getSelectedItem());
+		controller.getTags().removeIf(o -> o == tagTable.getSelectionModel().getSelectedItem());
 		tagTable.getItems().removeAll(tagTable.getSelectionModel().getSelectedItem());
-	
 
 	}
-
-	// // @Override
-	// // public void initialize(URL location, ResourceBundle resources) {
-	// // AccountName.setCellValueFactory(new PropertyValueFactory<>("name"));
-	// // AccountDesc.setCellValueFactory(new
-	// PropertyValueFactory<>("description"));
-	// // AccountType.setCellValueFactory(new PropertyValueFactory<>("type"));
-	// // AccountOpeningB.setCellValueFactory(new
-	// PropertyValueFactory<>("openingBalance"));
-	// // AccountB.setCellValueFactory(new PropertyValueFactory<>("balance"));
-	// // accountTable.setItems(accounts);
-	// }
-	//
-
-	// @FXML
-	// private void askAlert() {
-	// Stage stage = (Stage) closeButton.getScene().getWindow();
-
-	// Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-	// alert.setTitle("Alert");
-	// alert.setContentText("Are you sure?");
-	// ButtonType okButton = new ButtonType("YES", ButtonBar.ButtonData.YES);
-	// ButtonType cancelButton = new ButtonType("NO", ButtonBar.ButtonData.NO);
-	// alert.getButtonTypes().setAll(okButton, cancelButton);
-	// alert.showAndWait().ifPresent(type -> {
-
-	// if (type == ButtonType.OK) {
-	// newAccount();
-
-	// }
-	// ;
-	// });
-	// }
-
-	//
-
 }

@@ -1,11 +1,11 @@
 package it.unicam.cs.pa.jbudget100763.model;
 
-import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 /**
- * questa interfaccia √® implementata dalle classi che hanno la responsabilit√† di
- * gestire una transazione. Permette di accedere e modificare la informazioni
+ * questa interfaccia Ë implementata dalle classi che hanno la responsabilit‡†
+ * di gestire una transazione. Permette di accedere e modificare la informazioni
  * associate ad una transazione: lista dei tag, data, movimento. Un tag
  * associato (o rimosso) ad una transazione viene aggiunto (o rimosso) ad ogni
  * movimento della transazione. La transazione ha anche un saldo (ottenibile
@@ -14,25 +14,24 @@ import java.util.List;
  */
 public interface Transaction {
 
-    int getId();
+	int getId();
 
-    List<Movement> getMovements();
+	List<Movement> getMovements();
 
-    void addMovement(Movement m);
+	void addMovement(Movement m);
 
-    void removeMovement(Movement m);
+	void removeMovement(Movement m);
 
-    double getTotalAmount();
+	double getTotalAmount();
 
-    List<Tag> getTags();
+	List<Tag> getTags();
 
-    void addTag(Tag t);
+	void addTag(Tag t);
 
-    void removeTag(Tag t);
+	void removeTag(Tag t);
 
-    Date getDate();
+	GregorianCalendar getDate();
 
-    void setDate(Date d);
+	void setDate(GregorianCalendar d);
 
-	
 }

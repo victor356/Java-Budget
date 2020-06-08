@@ -1,7 +1,7 @@
 package it.unicam.cs.pa.jbudget100763.model;
 
+import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Date;
 
 /**
  * indica una transazione o una serie di transazioni schedulate (previste) ad
@@ -10,11 +10,11 @@ import java.util.Date;
  */
 public interface ScheduledTransaction {
 
-	List<Transaction> getTrans();
+	List<Transaction> getTransactions();
 
 	String getDescription();
 
-	List<Transaction> getTransactions(Date d);
+	List<Transaction> getTransactions(GregorianCalendar d);
 
 	boolean isCompleted();
 

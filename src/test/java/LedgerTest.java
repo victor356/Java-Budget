@@ -2,17 +2,16 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import it.unicam.cs.pa.jbudget100763.controller.Ledger;
-import it.unicam.cs.pa.jbudget100763.controller.LedgerImpl;
 import it.unicam.cs.pa.jbudget100763.model.Account;
 import it.unicam.cs.pa.jbudget100763.model.AccountType;
+import it.unicam.cs.pa.jbudget100763.model.Ledger;
+import it.unicam.cs.pa.jbudget100763.model.LedgerImpl;
 import it.unicam.cs.pa.jbudget100763.model.ScheduledTransactionImpl;
 import it.unicam.cs.pa.jbudget100763.model.Tag;
 import it.unicam.cs.pa.jbudget100763.model.Transaction;
@@ -51,15 +50,16 @@ public class LedgerTest {
 
 	@Test
 	void PredicateTransaction() throws ParseException {
-		Date d = new SimpleDateFormat("yyyyMMdd").parse("20210520");
-		Date d1 = new SimpleDateFormat("yyyyMMdd").parse("20210520");
+		GregorianCalendar d = new GregorianCalendar();
+		d.set(2015, 10, 5);
+		GregorianCalendar d1 = new GregorianCalendar();
+		d1.set(2015, 10, 5);
 
 		Transaction trans = new TransactionImpl();
 		trans.setDate(d);
 		System.out.println(trans.getDate());
 		List<Transaction> list = new ArrayList<Transaction>();
-		list.addAll(l.getTransactions(l.getTransactions(),
-				(x) -> x.getDate().getYear()==d1.getYear() && x.getDate().getMonth()==d1.getMonth() && x.getDate().getDay()==d1.getDay()));
+		list.addAll(l.getTransactions((x) -> x.getDate().compareTo(d1) == 0));
 		assertFalse(list.isEmpty());
 	}
 
@@ -67,7 +67,8 @@ public class LedgerTest {
 	void addScheduled() throws ParseException {
 
 		Transaction trans = new TransactionImpl();
-		Date d = new SimpleDateFormat("yyyyMMdd").parse("20210520");
+		GregorianCalendar d = new GregorianCalendar();
+		d.set(2015, 10, 5);
 		trans.setDate(d);
 
 		ScheduledTransactionImpl scheduledNow = new ScheduledTransactionImpl();
@@ -81,14 +82,15 @@ public class LedgerTest {
 
 	@Test
 	void schedule() throws ParseException {
-		Date d = new SimpleDateFormat("yyyyMMdd").parse("20210520");
+		GregorianCalendar d = new GregorianCalendar();
+		d.set(2015, 10, 5);
 		Transaction trans = new TransactionImpl();
 		trans.setDate(d);
 
 		ScheduledTransactionImpl scheduledNow = new ScheduledTransactionImpl();
 		l.schedule(d, scheduledNow);
 
-		assertFalse(scheduledNow.getTrans().isEmpty());
+		assertFalse(scheduledNow.getTransactions().isEmpty());
 		l.getTransactions().clear();
 
 	}

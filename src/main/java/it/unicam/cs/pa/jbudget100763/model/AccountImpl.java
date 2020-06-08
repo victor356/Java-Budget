@@ -4,18 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
-import it.unicam.cs.pa.jbudget100763.controller.Ledger;
-import it.unicam.cs.pa.jbudget100763.controller.LedgerImpl;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-
+/**
+ * 
+ * @author Vittorio
+ * 
+ *         Permette di accedere e modificare le informazioni del conto:
+ *         descrizione, saldo iniziale, tipologia. Consente inoltre di ottenere
+ *         il saldo attuale a runtime. Inoltre, è possibile accedere alla lista
+ *         dei movimenti associati e quelli che soddisfano un determinato
+ *         predicato.
+ */
 public class AccountImpl implements Account {
 
 	Ledger ledger = LedgerImpl.getInstance();
-	private double balance;
 	private String description;
 	private int id;
-	private List<Movement> movements=new ArrayList<Movement>();
 	private String name;
 	private double openingBalance;
 	private AccountType type;
@@ -24,21 +27,25 @@ public class AccountImpl implements Account {
 		this.type = type2;
 		this.name = name;
 		this.openingBalance = openingBalance2;
-		this.balance = openingBalance2;
 		this.description = description2;
 
 	}
 
+	/**
+	 * @return aggiorna in runtime il saldo attuale partendo da quello iniziale e
+	 *         sommando di volta in volta tutti i movimenti avvenuti
+	 */
 	public double getBalance() {
-		for (Transaction t: ledger.getTransactions()) {
-			for (Movement m: t.getMovements()) {
-				if(m.getAccount().getName()==this.getName()) {
-					this.balance+=m.getAmount();
+		double balance = 0;
+		for (Transaction t : ledger.getTransactions()) {
+			for (Movement m : t.getMovements()) {
+				if (m.getAccount().getName() == getName()) {
+					balance += m.getAmount();
 				}
 			}
 		}
-			
-		return this.balance;
+
+		return getOpeningBalance() + balance;
 	}
 
 	public String getDescription() {
@@ -57,18 +64,41 @@ public class AccountImpl implements Account {
 		this.id = id;
 	}
 
-	public List<Movement> getMovements() { // i movimenti a cui Ã¨ correlato questo account verranno raccolti nella lista
-											// personale di questo account (essi fanno parte delle transazioni e quindi
-											// sono raccolti nel ledger)
-		List<Movement> temp= new ArrayList<Movement>();
-		for (Transaction trans : ledger.getTransactions()) {
-			for (Movement mov : trans.getMovements()) {
+	/**
+	 * I movimenti correlati a questo account sono inclusi nelle transazioni (e
+	 * quindi nel ledger), successivamente questi vengono collegati all'account
+	 * 
+	 * @return ritorna la lista dei movimenti che si riferiscono a questo account
+	 */
+	public List<Movement> getMovements() {
+		List<Movement> temp = new ArrayList<Movement>();
+
+		ledger.getTransactions().parallelStream().forEach(transaction -> {
+			transaction.getMovements().forEach(mov -> {
 				if (mov.getAccount().getName() == this.getName())
 					temp.add(mov);
+			});
+		});
+
+		return temp;
+	}
+
+	/**
+	 * @param condition - Predicato da rispettare
+	 * @return ritorna la lista dei movimenti di questo account che rispettano il
+	 *         predicato
+	 */
+	@Override
+	public List<Movement> getMovements(Predicate<Movement> condition) {
+		List<Movement> temp = new ArrayList<Movement>();
+
+		for (Movement t : this.getMovements()) {
+			if (condition.test(t)) {
+				temp.add(t);
+
 			}
 		}
-		this.movements.addAll(temp);
-		return this.movements;
+		return temp;
 	}
 
 	public String getName() {
@@ -93,19 +123,6 @@ public class AccountImpl implements Account {
 
 	public void setType(AccountType type) {
 		this.type = type;
-	}
-
-	@Override
-	public List<Movement> getMovements(Predicate<Movement> condition) {
-		List<Movement> temp = new ArrayList<Movement>();
-
-		for (Movement t : this.getMovements()) {
-			if (t.getDate()!=null && condition.test(t)) {
-				temp.add(t);
-
-			}
-		}
-		return temp;
 	}
 
 }

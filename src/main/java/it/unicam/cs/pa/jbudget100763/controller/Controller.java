@@ -1,8 +1,9 @@
 package it.unicam.cs.pa.jbudget100763.controller;
 
 import java.util.GregorianCalendar;
-import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import it.unicam.cs.pa.jbudget100763.model.Account;
@@ -16,7 +17,7 @@ import it.unicam.cs.pa.jbudget100763.model.TagBudgetReportImpl;
 import it.unicam.cs.pa.jbudget100763.model.Transaction;
 
 /**
- * Ha la responsabilità di ricevere i comandi dell'utente e di attuarli
+ * Ha la responsabilitï¿½ di ricevere i comandi dell'utente e di attuarli
  * modificando lo stato degli altri due componenti del MVC
  * 
  * @author Vittorio
@@ -25,66 +26,87 @@ import it.unicam.cs.pa.jbudget100763.model.Transaction;
 public class Controller {
 	private TagBudgetReportImpl tagBudgetReport;
 	private BudgetImpl budgetImpl;
-	private ScheduledTransactionImpl scheduledTransactionImpl;
 
 	public Account addAccount(AccountType type, String name, String description, double openingBalance) {
-		return LedgerImpl.getInstance().addAccount(type, name, description, openingBalance);
+
+		if (name.isBlank()) {
+			throw new IllegalArgumentException();
+		}
+		return LedgerImpl.getInstance().addAccount(Objects.requireNonNull(type), name, description,
+				Objects.requireNonNullElse(openingBalance, Double.valueOf(0.0)));
+	}
+
+	public void removeAccount(Account o) {
+		this.getAccounts().remove(Objects.requireNonNull(o));
 	}
 
 	public Tag addTag(String name, String description) {
+		if (name.isBlank() || description.isBlank()) {
+			throw new IllegalArgumentException();
+		}
 		return LedgerImpl.getInstance().addTag(name, description);
 	}
 
 	public void removeTag(Tag t) {
-		LedgerImpl.getInstance().removeTag(t);
+		this.getTags().remove(Objects.requireNonNull(t));
 	}
 
-	public List<Account> getAccounts() {
+	public Set<Account> getAccounts() {
 		return LedgerImpl.getInstance().getAccounts();
 	}
 
-	public void addTransaction(Transaction t) {
-		LedgerImpl.getInstance().addTransaction(t);
+	public void addTransaction(GregorianCalendar date) {
+
+		LedgerImpl.getInstance().addTransaction(Objects.requireNonNull(date));
 	}
 
-	public List<Tag> getTags() {
+	public Set<Tag> getTags() {
 		return LedgerImpl.getInstance().getTags();
 	}
 
-	public List<Transaction> getTransactions() {
+	public Set<Transaction> getTransactions() {
 		return LedgerImpl.getInstance().getTransactions();
 	}
 
-	public List<Transaction> getTransactions(Predicate<Transaction> condition) {
-		return LedgerImpl.getInstance().getTransactions(condition);
+	public Set<Transaction> getTransactions(Predicate<Transaction> condition) {
+		return LedgerImpl.getInstance().getTransactions(Objects.requireNonNull(condition));
 	}
 
-	public ScheduledTransaction getScheduled() {
+	public Set<ScheduledTransaction> getScheduled() {
 		return LedgerImpl.getInstance().getScheduled();
 	}
 
-	public void schedule(GregorianCalendar d, ScheduledTransaction st) {
-		LedgerImpl.getInstance().schedule(d, st);
+	public ScheduledTransaction spotScheduledTransaction(GregorianCalendar d) {
+
+		return LedgerImpl.getInstance().searchScheduledTransaction(Objects.requireNonNull(d));
+	}
+
+	public void schedule(ScheduledTransaction st) {
+		LedgerImpl.getInstance().schedule(Objects.requireNonNull(st));
 	}
 
 	public Map<Tag, Double> report(Predicate<Transaction> condition) {
-		return tagBudgetReport.report(condition);
+
+		return (Objects.nonNull(condition)) ? tagBudgetReport.report(condition)
+				: tagBudgetReport.getTagBalance(getTransactions());
 	}
 
 	public double getBalance(Tag t) {
-		return budgetImpl.getBalance(t);
+		return budgetImpl.getBalance(Objects.requireNonNull(t));
 	}
 
 	public void setBalance(Tag t, Double expected) {
-		budgetImpl.setBalance(t, expected);
+		budgetImpl.setBalance(Objects.requireNonNull(t), Objects.requireNonNull(expected));
 	}
 
-	public List<Tag> tags(Predicate<Transaction> condition) {
-		return budgetImpl.tags(condition);
+	public Set<Tag> tags(Predicate<Transaction> condition) {
+		return budgetImpl.tags(Objects.requireNonNull(condition));
 	}
 
-	public List<Transaction> getTransactions(GregorianCalendar d) {
-		return scheduledTransactionImpl.getTransactions(d);
+	public void scheduleSpecificTransaction(Transaction transaction, ScheduledTransactionImpl st) {
+		if (!LedgerImpl.getInstance().scheduleSpecificTransaction(Objects.requireNonNull(transaction),
+				Objects.requireNonNull(st)))
+			throw new IllegalArgumentException();
 	}
 
 }

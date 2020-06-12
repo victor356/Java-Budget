@@ -1,10 +1,10 @@
 package it.unicam.cs.pa.jbudget100763.model;
 
-import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.Predicate;
 
 /**
@@ -47,15 +47,12 @@ public class BudgetImpl implements Budget {
 	 *         condizione (es: avvenute in un determinato periodo di tempo)
 	 */
 	@Override
-	public List<Tag> tags(Predicate<Transaction> condition) {
-		List<Transaction> transactions = new ArrayList<Transaction>();
-		List<Tag> tags = new ArrayList<Tag>();
+	public Set<Tag> tags(Predicate<Transaction> condition) {
+		Set<Tag> tags = new HashSet<Tag>();
 
-		transactions.addAll(LedgerImpl.getInstance().getTransactions(condition));
-		transactions.parallelStream().forEach(trans -> {
+		LedgerImpl.getInstance().getTransactions(condition).parallelStream().forEach(trans -> {
 			trans.getTags().parallelStream().forEach(t -> {
-				if (!tags.contains(t))
-					tags.add(t);
+				tags.add(t);
 			});
 		});
 

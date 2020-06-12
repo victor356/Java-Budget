@@ -27,7 +27,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 /**
- * Ha la responsabilità di caricare le schermate da avviare e raccogliere tutte
+ * Ha la responsabilitï¿½ di caricare le schermate da avviare e raccogliere tutte
  * le interazioni dell'utente tramite la javaFX GUI e di inoltrarle al
  * controller dell'applicazione
  * 
@@ -151,7 +151,8 @@ public class FxController implements Initializable,View {
 
 	@FXML
 	public void deleteAccount() {
-		controller.getAccounts().removeIf(o -> o == accountTable.getSelectionModel().getSelectedItem());
+		controller.removeAccount(accountTable.getSelectionModel().getSelectedItem());
+		controller.getAccounts().removeIf((Account o) -> o == accountTable.getSelectionModel().getSelectedItem());
 		accountTable.getItems().removeAll(accountTable.getSelectionModel().getSelectedItem());
 
 	}

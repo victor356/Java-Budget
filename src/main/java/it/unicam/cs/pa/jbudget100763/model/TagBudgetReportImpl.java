@@ -1,12 +1,12 @@
 package it.unicam.cs.pa.jbudget100763.model;
 
 import java.util.HashMap;
-import java.util.List;
+import java.util.Set;
 import java.util.Map;
 import java.util.function.Predicate;
 
 /**
- * ha la responsabilità  di mostrare il saldo di positivo/negativo di uno o più
+ * ha la responsabilitï¿½ di mostrare il saldo di positivo/negativo di uno o piï¿½
  * Tag.
  * 
  * @author Vittorio
@@ -23,7 +23,7 @@ public class TagBudgetReportImpl implements TagBudgetReport {
 	 * 
 	 */
 	@Override
-	public Map<Tag, Double> getTagBalance(List<Transaction> transactions) {
+	public Map<Tag, Double> getTagBalance(Set<Transaction> transactions) {
 		Map<Tag, Double> report = new HashMap<Tag, Double>();
 
 		for (Tag ta : totalTags()) {
@@ -38,7 +38,7 @@ public class TagBudgetReportImpl implements TagBudgetReport {
 	 * @return ritorna tutti i tag creati nell'applicazione
 	 */
 	@Override
-	public List<Tag> totalTags() {
+	public Set<Tag> totalTags() {
 		return LedgerImpl.getInstance().getTags();
 	}
 
@@ -50,7 +50,7 @@ public class TagBudgetReportImpl implements TagBudgetReport {
 	@Override
 	public  Map<Tag, Double> report(Predicate<Transaction> condition) {
 
-		List<Transaction> temp = LedgerImpl.getInstance().getTransactions(condition);
+		Set<Transaction> temp = LedgerImpl.getInstance().getTransactions(condition);
 
 		return getTagBalance(temp);
 	}

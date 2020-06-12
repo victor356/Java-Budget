@@ -1,11 +1,11 @@
 package it.unicam.cs.pa.jbudget100763.model;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.GregorianCalendar;
-import java.util.List;
+import java.util.Set;
 
 /**
- * ha la responsabilit‡† di gestire una transazione. Permette di accedere e
+ * ha la responsabilit√† di gestire una transazione. Permette di accedere e
  * modificare la informazioni associate ad una transazione: lista dei tag, data,
  * movimenti. Un tag associato (o rimosso) ad una transazione viene aggiunto (o
  * rimosso) ad ogni movimento della transazione. La transazione ha anche un
@@ -18,14 +18,21 @@ import java.util.List;
 public class TransactionImpl implements Transaction {
 
 	private int id;
-	private List<Movement> movements = new ArrayList<Movement>();
+	private Set<Movement> movements = new HashSet<Movement>();
 	private GregorianCalendar date;
 
-	/**
-	 * La classe viene inserita automaticamente nella lista del ledger
+	/*
+	 * public static RegistryImpl<TransactionImpl> getRegistry(){ return new
+	 * RegistryImpl<>(TransactionImpl::new); }
 	 */
-	public TransactionImpl() {
-		LedgerImpl.getInstance().addTransaction(this);
+
+	/**
+	 * La classe viene inserita automaticamente nella lista del ledger -- da
+	 * rimuovere
+	 */
+	public TransactionImpl( GregorianCalendar date) {
+		this.date = date;
+		
 	}
 
 	public int getId() {
@@ -36,7 +43,7 @@ public class TransactionImpl implements Transaction {
 		this.id = id;
 	}
 
-	public List<Movement> getMovements() {
+	public Set<Movement> getMovements() {
 		return this.movements;
 	}
 
@@ -61,8 +68,8 @@ public class TransactionImpl implements Transaction {
 	/**
 	 * @return Get a distinct tags list from all the movements
 	 */
-	public List<Tag> getTags() {
-		List<Tag> tags = new ArrayList<Tag>();
+	public Set<Tag> getTags() {
+		Set<Tag> tags = new HashSet<Tag>();
 
 		movements.parallelStream().forEach(mov -> {
 			mov.getTag().parallelStream().forEach(tag -> {

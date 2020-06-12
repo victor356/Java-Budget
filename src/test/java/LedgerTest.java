@@ -15,11 +15,17 @@ import it.unicam.cs.pa.jbudget100763.model.LedgerImpl;
 import it.unicam.cs.pa.jbudget100763.model.ScheduledTransactionImpl;
 import it.unicam.cs.pa.jbudget100763.model.Tag;
 import it.unicam.cs.pa.jbudget100763.model.Transaction;
-import it.unicam.cs.pa.jbudget100763.model.TransactionImpl;
-
 public class LedgerTest {
 
-	Ledger l = LedgerImpl.getInstance();
+	static Ledger l = LedgerImpl.getInstance();
+
+	static boolean insert() {
+
+		return l.addTransaction(new GregorianCalendar());
+	}
+	Transaction first() {
+		return l.getTransactions().stream().findFirst().get();
+	}
 
 	@Test
 	void addAccount() {
@@ -30,7 +36,7 @@ public class LedgerTest {
 
 	@Test
 	void addTag() {
-
+		insert();
 		Tag t = l.addTag("AUTO", "spese effettuate per manutenzione e uso dell'auto");
 		assertFalse(l.getTags().isEmpty());
 
@@ -41,57 +47,43 @@ public class LedgerTest {
 
 	@Test
 	void addTransaction() {
-		Transaction trans = new TransactionImpl();
-
-		assertFalse(l.getTransactions().isEmpty());
+		assertTrue(insert());
 		l.getTransactions().clear();
 
 	}
 
 	@Test
 	void PredicateTransaction() throws ParseException {
-		GregorianCalendar d = new GregorianCalendar();
-		d.set(2015, 10, 5);
-		GregorianCalendar d1 = new GregorianCalendar();
-		d1.set(2015, 10, 5);
-
-		Transaction trans = new TransactionImpl();
-		trans.setDate(d);
-		System.out.println(trans.getDate());
+		GregorianCalendar d = new GregorianCalendar(2015, 10, 5);
+		GregorianCalendar d1 = new GregorianCalendar(2015, 10, 5);
+		insert();
+		first().setDate(d);
+		System.out.println(first().getDate());
 		List<Transaction> list = new ArrayList<Transaction>();
-		list.addAll(l.getTransactions((x) -> x.getDate().compareTo(d1) == 0));
+		list.addAll(l.getTransactions((x) -> x.getDate().equals(d1)));
 		assertFalse(list.isEmpty());
 	}
 
 	@Test
 	void addScheduled() throws ParseException {
+		insert();
+		GregorianCalendar d = new GregorianCalendar(2015, 10, 5);
 
-		Transaction trans = new TransactionImpl();
-		GregorianCalendar d = new GregorianCalendar();
-		d.set(2015, 10, 5);
-		trans.setDate(d);
+		first().setDate(d);
 
-		ScheduledTransactionImpl scheduledNow = new ScheduledTransactionImpl();
+		ScheduledTransactionImpl scheduledNow = new ScheduledTransactionImpl(d);
 
-		scheduledNow.addTransaction(trans);
-		l.addScheduledTransaction(scheduledNow);
-
-		l.getTransactions().clear();
-
+		assertTrue(scheduledNow.addTransaction(first()));
 	}
 
 	@Test
 	void schedule() throws ParseException {
-		GregorianCalendar d = new GregorianCalendar();
-		d.set(2015, 10, 5);
-		Transaction trans = new TransactionImpl();
-		trans.setDate(d);
-
-		ScheduledTransactionImpl scheduledNow = new ScheduledTransactionImpl();
-		l.schedule(d, scheduledNow);
-
+		GregorianCalendar d = new GregorianCalendar(2015, 10, 5);
+		insert();
+		first().setDate(d);
+		ScheduledTransactionImpl scheduledNow = new ScheduledTransactionImpl(d);
+		l.schedule(scheduledNow);
 		assertFalse(scheduledNow.getTransactions().isEmpty());
-		l.getTransactions().clear();
 
 	}
 }

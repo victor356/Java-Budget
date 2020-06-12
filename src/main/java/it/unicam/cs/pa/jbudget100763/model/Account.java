@@ -1,13 +1,13 @@
 package it.unicam.cs.pa.jbudget100763.model;
 
-import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 
 /**
- * questa interfaccia è implementata dalle classi che hanno la responsabilità 
+ * questa interfaccia ï¿½ implementata dalle classi che hanno la responsabilitï¿½
  * di gestire un conto. Permette di accedere e modificare le informazioni del
  * conto: descrizione, saldo iniziale, tipologia. Consente inoltre di ottenere
- * il saldo attuale. Inoltre, è possibile accedere alla lista dei movimenti e
+ * il saldo attuale. Inoltre, ï¿½ possibile accedere alla lista dei movimenti e
  * quelli che soddisfano un determinato predicato.
  */
 public interface Account {
@@ -21,9 +21,9 @@ public interface Account {
 
 	double getBalance();
 
-	List<Movement> getMovements();
+	Set<Movement> getMovements();
 
-	List<Movement> getMovements(Predicate<Movement> p);
+	Set<Movement> getMovements(Predicate<Movement> p);
 
 	AccountType getType();
 

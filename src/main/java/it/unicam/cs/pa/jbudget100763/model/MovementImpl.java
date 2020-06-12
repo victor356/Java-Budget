@@ -1,15 +1,15 @@
 package it.unicam.cs.pa.jbudget100763.model;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.GregorianCalendar;
-import java.util.List;
+import java.util.Set;
 
 /**
- * questa classe implementa la responsabilità di gestire un singolo movimento.
+ * questa classe implementa la responsabilitï¿½ di gestire un singolo movimento.
  * Permette di accedere e modificare le informazioni associate al movimento:
  * descrizione, importo, account associato, lista dei tag associati al
  * movimento. Le operazioni di lettura e modifica di queste operazioni vengono
- * effettuate per mezzo degli opportuni getter e setter. Il movimento è associato
+ * effettuate per mezzo degli opportuni getter e setter. Il movimento ï¿½ associato
  * ad una transazione da cui deriva la data. I tag inseriti nei movimenti vengono
  * raccolti senza ripetersi dalla transazione, i tag aggiunti alla transazione
  * vengono distribuiti a tutti i movimenti a lei associati
@@ -26,7 +26,7 @@ public class MovementImpl implements Movement {
 	private Account account;
 	private int id;
 	private GregorianCalendar date;
-	List<Tag> tag = new ArrayList<Tag>();
+	Set<Tag> tag = new HashSet<Tag>();
 
 	/**
 	 * Costruttore del movimento, esso viene automaticamente collegato alla
@@ -116,7 +116,7 @@ public class MovementImpl implements Movement {
 		this.date = date;
 	}
 
-	public List<Tag> getTag() {
+	public Set<Tag> getTag() {
 		return this.tag;
 	}
 

@@ -22,7 +22,7 @@ dependencies {
     // This dependency is exported to consumers, that is to say found on their compile classpath.
 
     // This dependency is used internally, and not exposed to consumers on their own compile classpath.
-    implementation 'com.google.guava:guava:28.2-jre'
+    implementation 'com.google.guava:guava:28.2-jre', 'com.google.code.gson:gson:2.8.6'
 
     // Use JUnit test framework
     testImplementation(

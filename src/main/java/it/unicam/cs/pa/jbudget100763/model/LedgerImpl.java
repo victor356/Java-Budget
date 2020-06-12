@@ -1,12 +1,12 @@
 package it.unicam.cs.pa.jbudget100763.model;
 
-import java.util.ArrayList;
 import java.util.GregorianCalendar;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.function.Predicate;
 
 /**
- * ha la responsabilit‡ di gestire tutti i dati dell'applicazione. Ë
+ * ha la responsabilit√† di gestire tutti i dati dell'applicazione. √®
  * responsabile della creazione dei conti, dell'aggiunta e cancellazione delle
  * transazioni, della creazione e cancellazione dei tag. Inoltre mantiene la
  * lista delle transazione schedulate. Si occupa di schedulare le transazioni ad
@@ -16,16 +16,16 @@ import java.util.function.Predicate;
  *
  */
 public class LedgerImpl implements Ledger {
-	List<Transaction> transactions = new ArrayList<Transaction>();
-	List<Account> accounts = new ArrayList<Account>();
-	List<Tag> tags = new ArrayList<Tag>();
-	List<ScheduledTransaction> scheduledTransaction = new ArrayList<ScheduledTransaction>();
-	ScheduledTransaction scheduled = new ScheduledTransactionImpl();
+	Set<Transaction> transactions = new HashSet<Transaction>();
+	Set<Account> accounts = new HashSet<Account>();
+	Set<Tag> tags = new HashSet<Tag>();
+	Set<ScheduledTransaction> scheduledTransaction = new HashSet<ScheduledTransaction>();
 
 	private static LedgerImpl ledger;
 
 	/**
 	 * Singleton
+	 * 
 	 * @return ledger
 	 */
 	public static LedgerImpl getInstance() {
@@ -54,7 +54,7 @@ public class LedgerImpl implements Ledger {
 	/**
 	 * Crea un nuovo tag nell'applicazione
 	 * 
-	 * @param name       - nome tag
+	 * @param name        - nome tag
 	 * @param description - descrizione del tag
 	 * @return nuovo tag instanziato ed inserito nella lista
 	 */
@@ -76,21 +76,20 @@ public class LedgerImpl implements Ledger {
 		tags.remove(t);
 	}
 
-	public void addTransaction(Transaction t) {
-		transactions.add(t);
-
+	public boolean addTransaction(GregorianCalendar date) {
+		return transactions.add(new TransactionImpl(date));
 	}
 
-	public List<Account> getAccounts() {
+	public Set<Account> getAccounts() {
 
 		return accounts;
 	}
 
-	public List<Tag> getTags() {
+	public Set<Tag> getTags() {
 		return tags;
 	}
 
-	public List<Transaction> getTransactions() {
+	public Set<Transaction> getTransactions() {
 		return transactions;
 	}
 
@@ -98,8 +97,8 @@ public class LedgerImpl implements Ledger {
 	 * @param condition - Predicate che le transizioni devono rispettare
 	 * @return ritorna la lista di transazioni che rispettano un certo predicato
 	 */
-	public List<Transaction> getTransactions(Predicate<Transaction> condition) {
-		List<Transaction> temp = new ArrayList<Transaction>();
+	public Set<Transaction> getTransactions(Predicate<Transaction> condition) {
+		Set<Transaction> temp = new HashSet<Transaction>();
 
 		for (Transaction t : this.getTransactions()) {
 			if (condition.test(t)) {
@@ -110,12 +109,27 @@ public class LedgerImpl implements Ledger {
 		return temp;
 	}
 
-	public ScheduledTransaction getScheduled() {
-		return scheduled;
+	/**
+	 * 
+	 * @return all the scheduled Transactions
+	 */
+	public Set<ScheduledTransaction> getScheduled() {
+		return scheduledTransaction;
 	}
 
 	/**
-	 * Aggiunge l'istanza Sch.Tran. alla lista "contenitore" dell'applicazione presente nel ledger
+	 * 
+	 * @param d
+	 * @return la specifica scheduled transaction fissata a quella data
+	 */
+	public ScheduledTransaction searchScheduledTransaction(GregorianCalendar d) {
+		return scheduledTransaction.stream().filter((ScheduledTransaction st) -> st.getDate() == d).findAny()
+				.orElse(null);
+	}
+
+	/**
+	 * Aggiunge l'istanza Sch.Tran. alla lista "contenitore" dell'applicazione
+	 * presente nel ledger
 	 * 
 	 * @param st - Scheduled Transaction
 	 * 
@@ -125,18 +139,31 @@ public class LedgerImpl implements Ledger {
 	}
 
 	/**
-	 * 
+	 * Combina (aggiunge) una transazione prevista ad una data futura con una
+	 * scheduled transaction
+	 *
 	 * @param st - scheduler di riferimento
-	 * @param d  - data di riferimento Aggiunge una transazione prevista ad una data
-	 *           futura ad una scheduled transaction
+	 * @param d  - data di riferimento.
 	 */
-	public void schedule(GregorianCalendar d, ScheduledTransaction st) {
+	public void schedule(ScheduledTransaction st) {
 
 		for (Transaction t : transactions) {
-			if (t.getDate() == d) {
+			if (t.getDate() == st.getDate()) {
 				st.getTransactions().add(t);
 			}
 		}
+	}
+
+	/**
+	 * Combina manualmente una transazione con una Sched.Transaction, vale ancora il
+	 * requisito che debbano manifestarsi lo stesso momento
+	 * 
+	 * @param transaction transazione da inserire
+	 * @param st          Sched.Trans. da accoppiare
+	 * @return se l'operazione √® andata a buon fine
+	 */
+	public boolean scheduleSpecificTransaction(Transaction transaction, ScheduledTransaction st) {
+		return st.addTransaction(transaction);
 
 	}
 

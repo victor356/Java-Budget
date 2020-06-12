@@ -18,6 +18,18 @@ public class ScheduledTransactionImpl implements ScheduledTransaction {
 	private List<Transaction> trans = new ArrayList<Transaction>();
 	private GregorianCalendar date;
 
+	public ScheduledTransactionImpl(GregorianCalendar d) {
+		this.date = d;
+	}
+
+	public GregorianCalendar getDate() {
+		return this.date;
+	}
+
+	public void setDate(GregorianCalendar date) {
+		this.date = date;
+	};
+
 	public List<Transaction> getTransactions() {
 		return trans;
 	}
@@ -30,35 +42,26 @@ public class ScheduledTransactionImpl implements ScheduledTransaction {
 		this.description = desc;
 	};
 
-	/**
-	 * @return ritorna le transazioni che sono state programmate ad una certa data
-	 */
-	@Override
-	public List<Transaction> getTransactions(GregorianCalendar d) {
-		List<Transaction> temp = new ArrayList<Transaction>();
-		for (Transaction t : trans) {
-			if (t.getDate() == d)
-				temp.add(t);
-		}
-		return temp;
-	}
+
 
 	/**
 	 * @return conferma se la serie di transazioni si sia manifestata o meno
 	 */
 	@Override
 	public boolean isCompleted() {
-		if (!trans.isEmpty()) {
-			this.date = trans.get(0).getDate();
-		} else {
-			return false;
-		}
+
 		return this.date.after(GregorianCalendar.getInstance());
 
 	}
 
-	public void addTransaction(Transaction t) {
-		this.trans.add(t);
+	/**
+	 * 
+	 * @param t transazione da schedulare
+	 * @return se la transazione da inserire rispetta i requisiti della
+	 *         scheduledTransaction
+	 */
+	public boolean addTransaction(Transaction t) {
 
+		return (t.getDate() == getDate() ? this.trans.add(t) : false);
 	}
 }

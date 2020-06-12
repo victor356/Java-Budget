@@ -1,7 +1,8 @@
 package it.unicam.cs.pa.jbudget100763.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.Map;
 import java.util.function.Predicate;
 
 /**
@@ -10,15 +11,15 @@ import java.util.function.Predicate;
  * 
  *         Permette di accedere e modificare le informazioni del conto:
  *         descrizione, saldo iniziale, tipologia. Consente inoltre di ottenere
- *         il saldo attuale a runtime. Inoltre, è possibile accedere alla lista
+ *         il saldo attuale a runtime. Inoltre, ï¿½ possibile accedere alla lista
  *         dei movimenti associati e quelli che soddisfano un determinato
  *         predicato.
  */
 public class AccountImpl implements Account {
 
 	Ledger ledger = LedgerImpl.getInstance();
-	private String description;
 	private int id;
+	private String description;
 	private String name;
 	private double openingBalance;
 	private AccountType type;
@@ -28,6 +29,19 @@ public class AccountImpl implements Account {
 		this.name = name;
 		this.openingBalance = openingBalance2;
 		this.description = description2;
+
+	}
+	public AccountImpl(int id){
+		this.id=id;
+	}
+	private static Map<Integer, AccountImpl>registry;
+
+	public static AccountImpl getInstance(int id) {
+		if (registry.containsKey(id)) {
+			return registry.get(id);
+		} else {
+			return new AccountImpl(id);
+		}
 
 	}
 
@@ -70,8 +84,8 @@ public class AccountImpl implements Account {
 	 * 
 	 * @return ritorna la lista dei movimenti che si riferiscono a questo account
 	 */
-	public List<Movement> getMovements() {
-		List<Movement> temp = new ArrayList<Movement>();
+	public Set<Movement> getMovements() {
+		Set<Movement> temp = new HashSet<Movement>();
 
 		ledger.getTransactions().parallelStream().forEach(transaction -> {
 			transaction.getMovements().forEach(mov -> {
@@ -89,8 +103,8 @@ public class AccountImpl implements Account {
 	 *         predicato
 	 */
 	@Override
-	public List<Movement> getMovements(Predicate<Movement> condition) {
-		List<Movement> temp = new ArrayList<Movement>();
+	public Set<Movement> getMovements(Predicate<Movement> condition) {
+		Set<Movement> temp = new HashSet<Movement>();
 
 		for (Movement t : this.getMovements()) {
 			if (condition.test(t)) {

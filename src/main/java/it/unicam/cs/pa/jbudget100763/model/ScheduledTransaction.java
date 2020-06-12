@@ -10,14 +10,16 @@ import java.util.List;
  */
 public interface ScheduledTransaction {
 
-	List<Transaction> getTransactions();
+	GregorianCalendar getDate();
 
 	String getDescription();
 
-	List<Transaction> getTransactions(GregorianCalendar d);
+	List<Transaction> getTransactions();
 
 	boolean isCompleted();
 
 	void setDescription(String desc);
+
+	boolean addTransaction(Transaction transaction);
 
 }

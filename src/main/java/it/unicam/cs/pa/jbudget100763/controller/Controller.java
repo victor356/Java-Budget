@@ -29,11 +29,11 @@ public class Controller {
 
 	public Account addAccount(AccountType type, String name, String description, double openingBalance) {
 
-		if (name.isBlank()) {
-			throw new IllegalArgumentException();
+		if (name.isEmpty()) {
+			throw new IllegalArgumentException("Inserire nome!!!!");
 		}
 		return LedgerImpl.getInstance().addAccount(Objects.requireNonNull(type), name, description,
-				Objects.requireNonNullElse(openingBalance, Double.valueOf(0.0)));
+				Objects.requireNonNull(openingBalance));
 	}
 
 	public void removeAccount(Account o) {
@@ -41,8 +41,8 @@ public class Controller {
 	}
 
 	public Tag addTag(String name, String description) {
-		if (name.isBlank() || description.isBlank()) {
-			throw new IllegalArgumentException();
+		if (name.isEmpty()|| description.isEmpty()) {
+			throw new IllegalArgumentException("Inserire nome o Descrizione!!!!");
 		}
 		return LedgerImpl.getInstance().addTag(name, description);
 	}

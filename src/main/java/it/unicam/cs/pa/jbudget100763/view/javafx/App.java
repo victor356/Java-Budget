@@ -2,9 +2,9 @@ package it.unicam.cs.pa.jbudget100763.view.javafx;
 
 import java.io.IOException;
 
-import it.unicam.cs.pa.jbudget100763.view.View;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
@@ -57,7 +57,7 @@ public class App extends Application  {
 	}
 
 	/**
-	 * Ha il compito di aprire la schermata dove è riassunta la gestione
+	 * Ha il compito di aprire la schermata dove Ã¨ riassunta la gestione
 	 * dell'account
 	 * 
 	 * @throws IOException
@@ -71,25 +71,33 @@ public class App extends Application  {
 		addDialogStage.initOwner(primaryStage);
 		addDialogStage.setScene(new Scene(mainLayout));
 		addDialogStage.showAndWait();
-	}
+		}
 /**
  * Creazione schermata per creare un account
  * @throws IOException
  */
 	public static void createAccount() throws IOException {
-
-		mainLayout = FXMLLoader.load(App.class.getResource("/newAccount.fxml"));
 		Stage addDialogStage = new Stage();
-		addDialogStage.setTitle("Add New Account");
-		addDialogStage.initModality(Modality.WINDOW_MODAL);
-		addDialogStage.initOwner(primaryStage);
-		addDialogStage.setScene(new Scene(mainLayout));
-		addDialogStage.showAndWait();
-	}
+
+	 	mainLayout = FXMLLoader.load(App.class.getResource("/newAccount.fxml"));
+	addDialogStage.setTitle("Add New Account");
+	addDialogStage.initModality(Modality.WINDOW_MODAL);
+	addDialogStage.initOwner(primaryStage);
+	addDialogStage.setScene(new Scene(mainLayout));
+	addDialogStage.showAndWait();
+	
+/* 
+		FXMLLoader loader = new FXMLLoader(App.class.getResource("/newAccount.fxml"));
+		Parent root = loader.load();
+        addDialogStage.setResizable(false);
+        addDialogStage.setScene(new Scene(root));
+        addDialogStage.setTitle("Account");
+        addDialogStage.showAndWait(); */
+		}
 	
 	
 	/**
-	 * Ha il compito di aprire la schermata dove è riassunta la gestione
+	 * Ha il compito di aprire la schermata dove ï¿½ riassunta la gestione
 	 * dei tag
 	 * @throws IOException
 	 */

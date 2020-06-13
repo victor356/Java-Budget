@@ -119,7 +119,7 @@ public class LedgerImpl implements Ledger {
 
 	/**
 	 * 
-	 * @param d
+	 * @param d data in input
 	 * @return la specifica scheduled transaction fissata a quella data
 	 */
 	public ScheduledTransaction searchScheduledTransaction(GregorianCalendar d) {
@@ -143,7 +143,7 @@ public class LedgerImpl implements Ledger {
 	 * scheduled transaction
 	 *
 	 * @param st - scheduler di riferimento
-	 * @param d  - data di riferimento.
+	 * 
 	 */
 	public void schedule(ScheduledTransaction st) {
 

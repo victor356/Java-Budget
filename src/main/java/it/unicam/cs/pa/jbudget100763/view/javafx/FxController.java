@@ -34,9 +34,13 @@ import javafx.stage.Stage;
  * @author Vittorio
  *
  */
-public class FxController implements Initializable,View {
+public class FxController implements Initializable, View {
 
-	Controller controller = new Controller();
+	private static Controller controller = new Controller();
+
+	public static Controller getController() {
+		return controller;
+	}
 
 	@FXML
 	private void start() throws IOException {
@@ -49,14 +53,14 @@ public class FxController implements Initializable,View {
 	}
 
 	@FXML
-	public
-	 void manageAccount() throws IOException {
+	public void manageAccount() throws IOException {
 		App.manageAccount();
 	}
 
 	@FXML
 	public void createAccount() throws IOException {
 		App.createAccount();
+		createAccountTable();
 	}
 
 	/**
@@ -79,25 +83,40 @@ public class FxController implements Initializable,View {
 	@FXML
 	private TableColumn<Account, Double> AccountB = new TableColumn<Account, Double>();
 
-	ObservableList<Account> accounts = FXCollections.observableArrayList(controller.getAccounts());
+	private ObservableList<Account> getAccounts() throws IOException {
+		ObservableList<Account> observableList = FXCollections.observableArrayList();
+		observableList.addAll(controller.getAccounts());
+		return observableList;
+	}
 
 	/**
 	 * Match delle colonne della tabella con gli attributi delle classi
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
+		try {
+			createAccountTable();
+			createTagTable();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
-		AccountName.setCellValueFactory(new PropertyValueFactory<Account, String>("name"));
-		AccountDesc.setCellValueFactory(new PropertyValueFactory<Account, String>("description"));
-		Type.setCellValueFactory(new PropertyValueFactory<Account, AccountType>("type"));
-		AccountOpeningB.setCellValueFactory(new PropertyValueFactory<Account, Double>("openingBalance"));
-		AccountB.setCellValueFactory(new PropertyValueFactory<Account, Double>("balance"));
-		accountTable.getItems().addAll(accounts);
-		
-		// tag
+	private void createAccountTable() throws IOException {
+		AccountName.setCellValueFactory(new PropertyValueFactory<>("name"));
+		AccountDesc.setCellValueFactory(new PropertyValueFactory<>("description"));
+		Type.setCellValueFactory(new PropertyValueFactory<>("type"));
+		AccountOpeningB.setCellValueFactory(new PropertyValueFactory<>("openingBalance"));
+		AccountB.setCellValueFactory(new PropertyValueFactory<>("balance"));
+		accountTable.setItems(getAccounts());
+
+	}
+	
+	private void createTagTable() throws IOException{
 		tagName.setCellValueFactory(new PropertyValueFactory<Tag, String>("name"));
 		tagDescription.setCellValueFactory(new PropertyValueFactory<Tag, String>("description"));
-		tagTable.getItems().addAll(tags);
+		tagTable.setItems(getTags());
+
 	}
 
 	/**
@@ -119,7 +138,7 @@ public class FxController implements Initializable,View {
 	private TextField accountOpeningBalanceField = new TextField();
 
 	@FXML
-	private ChoiceBox<AccountType> accountTypeField = new ChoiceBox<AccountType>();;
+	private ChoiceBox<AccountType> accountTypeField = new ChoiceBox<AccountType>();
 
 	ObservableList<AccountType> accountChoice = FXCollections
 			.observableArrayList(new ArrayList<AccountType>(EnumSet.allOf(AccountType.class)));
@@ -133,42 +152,20 @@ public class FxController implements Initializable,View {
 
 	}
 
-	@FXML
-	private void newAccount() {
-		accountTable.getItems().add(new AccountImpl(accountTypeField.getValue(), accountNameField.getText(),
-				Double.parseDouble(accountOpeningBalanceField.getText()), accountDescriptionField.getText()));
-		// accounts.add(new AccountImpl(accountTypeField.getValue(),
-		// accountNameField.getText(),
-		// Double.parseDouble(accountOpeningBalanceField.getText()),
-		// accountDescriptionField.getText()));
-		controller.addAccount(accountTypeField.getValue(), accountNameField.getText(),
-				accountDescriptionField.getText(), Double.parseDouble(accountOpeningBalanceField.getText()));
-
-		Stage stage = (Stage) closeButton.getScene().getWindow();
-		stage.close();
-
-	}
 
 	@FXML
 	public void deleteAccount() {
 		controller.removeAccount(accountTable.getSelectionModel().getSelectedItem());
-		controller.getAccounts().removeIf((Account o) -> o == accountTable.getSelectionModel().getSelectedItem());
 		accountTable.getItems().removeAll(accountTable.getSelectionModel().getSelectedItem());
 
 	}
 
-	/**
-	 * closes the window
-	 */
-	@FXML
-	private void closeButtonAction() {
 
-		Stage stage = (Stage) closeButton.getScene().getWindow();
-		stage.close();
+	private ObservableList<Tag> getTags() throws IOException {
+		ObservableList<Tag> observableList = FXCollections.observableArrayList();
+		observableList.addAll(controller.getTags());
+		return observableList;
 	}
-
-	ObservableList<Tag> tags = FXCollections.observableArrayList(controller.getTags());
-
 	/**
 	 * tag table management
 	 */
@@ -181,6 +178,8 @@ public class FxController implements Initializable,View {
 	@FXML
 	public void createTag() throws IOException {
 		App.createTag();
+		createTagTable();
+
 	}
 
 	@FXML
@@ -192,25 +191,7 @@ public class FxController implements Initializable,View {
 	@FXML
 	private TableColumn<Tag, String> tagDescription = new TableColumn<Tag, String>();
 
-	/**
-	 * new Tag scene
-	 */
-
-	@FXML
-	private TextField tagNameField = new TextField();
-
-	@FXML
-	private TextField TagDescriptionField = new TextField();
-
-	@FXML
-	void newTag() {
-		Tag t = new TagImpl(tagNameField.getText(), TagDescriptionField.getText());
-		LedgerImpl.getInstance().getTags().add(t);
-		tagTable.getItems().add(t);
-
-		Stage stage = (Stage) closeButton.getScene().getWindow();
-		stage.close();
-	}
+	
 
 	@FXML
 	private void deleteTag() {
@@ -218,4 +199,5 @@ public class FxController implements Initializable,View {
 		tagTable.getItems().removeAll(tagTable.getSelectionModel().getSelectedItem());
 
 	}
+	
 }

@@ -14,11 +14,11 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="500.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicam.cs.pa.jbudget100763.view.javafx.FxController">
+<BorderPane prefHeight="500.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicam.cs.pa.jbudget100763.view.javafx.AccountController">
    <bottom>
       <HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="alertButton" mnemonicParsing="false" onAction="#newAccount" prefWidth="80.0" text="OK" />
+            <Button fx:id="alertButton" mnemonicParsing="false" onAction="#addAccount" prefWidth="80.0" text="OK" />
             <Button fx:id="closeButton" alignment="CENTER" cancelButton="true" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#closeButtonAction" prefWidth="80.0" text="Cancel" />
          </children>
       </HBox>

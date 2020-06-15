@@ -93,8 +93,8 @@ public class FxController implements Initializable,View {
 		AccountOpeningB.setCellValueFactory(new PropertyValueFactory<Account, Double>("openingBalance"));
 		AccountB.setCellValueFactory(new PropertyValueFactory<Account, Double>("balance"));
 		accountTable.getItems().addAll(accounts);
+		
 		// tag
-
 		tagName.setCellValueFactory(new PropertyValueFactory<Tag, String>("name"));
 		tagDescription.setCellValueFactory(new PropertyValueFactory<Tag, String>("description"));
 		tagTable.getItems().addAll(tags);

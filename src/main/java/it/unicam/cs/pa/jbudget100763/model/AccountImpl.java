@@ -1,3 +1,19 @@
+/*
+This file is part of JBudget.
+
+    JBudget is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Foobar is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Foobar.  If not, see <https://www.gnu.org/licenses/>.
+*/
 package it.unicam.cs.pa.jbudget100763.model;
 
 import java.util.HashSet;
@@ -11,7 +27,7 @@ import java.util.function.Predicate;
  * 
  *         Permette di accedere e modificare le informazioni del conto:
  *         descrizione, saldo iniziale, tipologia. Consente inoltre di ottenere
- *         il saldo attuale a runtime. Inoltre, � possibile accedere alla lista
+ *         il saldo attuale a runtime. Inoltre, è possibile accedere alla lista
  *         dei movimenti associati e quelli che soddisfano un determinato
  *         predicato.
  */
@@ -33,16 +49,6 @@ public class AccountImpl implements Account {
 	}
 	public AccountImpl(int id){
 		this.id=id;
-	}
-	private static Map<Integer, AccountImpl>registry;
-
-	public static AccountImpl getInstance(int id) {
-		if (registry.containsKey(id)) {
-			return registry.get(id);
-		} else {
-			return new AccountImpl(id);
-		}
-
 	}
 
 	/**
@@ -79,7 +85,7 @@ public class AccountImpl implements Account {
 	}
 
 	/**
-	 * I movimenti correlati a questo account sono inclusi nelle transazioni (e
+	 * I movimenti correlati a questo account hanno il riferimento nelle transazioni (e
 	 * quindi nel ledger), successivamente questi vengono collegati all'account
 	 * 
 	 * @return ritorna la lista dei movimenti che si riferiscono a questo account

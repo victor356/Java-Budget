@@ -1,3 +1,19 @@
+/*
+This file is part of JBudget.
+
+    JBudget is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Foobar is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Foobar.  If not, see <https://www.gnu.org/licenses/>.
+*/
 package it.unicam.cs.pa.jbudget100763.controller;
 
 import java.util.GregorianCalendar;
@@ -17,8 +33,8 @@ import it.unicam.cs.pa.jbudget100763.model.TagBudgetReportImpl;
 import it.unicam.cs.pa.jbudget100763.model.Transaction;
 
 /**
- * Ha la responsabilit� di ricevere i comandi dell'utente e di attuarli
- * modificando lo stato degli altri due componenti del MVC
+ * Ha la responsabilità di ricevere i comandi della vista e di attuarli
+ * modificando lo stato del Model
  * 
  * @author Vittorio
  *
@@ -28,7 +44,7 @@ public class Controller {
 	private BudgetImpl budgetImpl;
 
 	public Account addAccount(AccountType type, String name, String description, double openingBalance) {
-
+		
 		if (name.isEmpty()) {
 			throw new IllegalArgumentException("Inserire nome!!!!");
 		}
@@ -41,7 +57,7 @@ public class Controller {
 	}
 
 	public Tag addTag(String name, String description) {
-		if (name.isEmpty()|| description.isEmpty()) {
+		if (name.isEmpty() || description.isEmpty()) {
 			throw new IllegalArgumentException("Inserire nome o Descrizione!!!!");
 		}
 		return LedgerImpl.getInstance().addTag(name, description);

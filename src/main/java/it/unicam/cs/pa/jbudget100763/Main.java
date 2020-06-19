@@ -20,7 +20,7 @@ import it.unicam.cs.pa.jbudget100763.view.javafx.App;
 import javafx.application.Application;
 
 /**
- * main eseguibile dell'applicazione
+ * Main eseguibile dell'applicazione
  */
 public class Main {
 

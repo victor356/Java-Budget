@@ -19,7 +19,7 @@ package it.unicam.cs.pa.jbudget100763.view;
 import java.io.IOException;
 
 /**
- * Ha la responsabilit� di indicare le direttive principali riguardo
+ * Ha la responsabilità di indicare le direttive principali riguardo
  * l'interazione dell'utente con l'applicazione
  * 
  * @author Vittorio

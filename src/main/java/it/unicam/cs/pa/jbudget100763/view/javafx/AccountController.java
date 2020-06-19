@@ -34,7 +34,13 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+/**
+ * Gestisce i metodi chiamati dalla schermata di creazione di un utente,
+ * indirizzandoli al controller MVC
+ */
 public class AccountController implements Initializable {
+    private Controller controller = new Controller();
+
     @FXML
     private TextField accountNameField = new TextField();
 
@@ -52,8 +58,6 @@ public class AccountController implements Initializable {
 
     @FXML
     private Button closeButton;
-
-    private Controller controller = new Controller();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -79,8 +83,8 @@ public class AccountController implements Initializable {
 
     public void addAccount(ActionEvent actionEvent) throws IOException {
         if (accountOpeningBalanceField.getText().isEmpty()) {
-			throw new IllegalArgumentException("Inserire cifra iniziale!!!!");
-		}
+            throw new IllegalArgumentException("Inserire cifra iniziale!!!!");
+        }
         controller.addAccount(accountTypeField.getValue(), accountNameField.getText(),
                 accountDescriptionField.getText(), Double.parseDouble(accountOpeningBalanceField.getText()));
 

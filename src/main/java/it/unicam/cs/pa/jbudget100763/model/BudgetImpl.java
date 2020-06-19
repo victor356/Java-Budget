@@ -26,7 +26,7 @@ import java.util.function.Predicate;
 /**
  * Ogni budget associa ad ogni tag un importo che indica l'ammontare di
  * spesa/guadagno previsto per il particolare tag. Ogni budget, inoltre,
- * costruisce il predicato per selezionare le transazioni di interesse.
+ * costruisce il predicato per considerare solo le transazioni di interesse.
  * 
  * @author Vittorio
  *

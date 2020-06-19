@@ -22,7 +22,7 @@ import java.util.Map;
 import java.util.function.Predicate;
 
 /**
- * ha la responsabilit� di mostrare il saldo di positivo/negativo di uno o pi�
+ * ha la responsabilità di mostrare il saldo di positivo/negativo di uno o più
  * Tag.
  * 
  * @author Vittorio

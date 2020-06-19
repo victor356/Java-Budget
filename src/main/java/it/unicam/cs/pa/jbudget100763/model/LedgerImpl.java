@@ -40,7 +40,7 @@ public class LedgerImpl implements Ledger {
 	private static LedgerImpl ledger;
 
 	/**
-	 * Singleton
+	 * Singleton implementation
 	 * 
 	 * @return ledger
 	 */

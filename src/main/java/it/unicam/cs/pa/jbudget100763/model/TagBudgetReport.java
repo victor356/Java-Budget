@@ -20,8 +20,8 @@ import java.util.Set;
 import java.util.Map;
 import java.util.function.Predicate;
 
-/* ha la responsabilit� di mostrare il saldo di spesa/guadagno 
- * di uno o pi� Tag. 
+/* ha la responsabilità di mostrare il saldo di spesa/guadagno 
+ * di uno o più Tag. 
 */
 public interface TagBudgetReport {
 

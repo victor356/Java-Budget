@@ -21,7 +21,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
+/**
+ * Ha la responsabilità di gestire la finestra per la creazione dei Tag
+ */
 public class TagController {
 
     /**

@@ -21,11 +21,11 @@ import java.util.GregorianCalendar;
 import java.util.Set;
 
 /**
- * questa classe implementa la responsabilit� di gestire un singolo movimento.
+ * questa classe implementa la responsabilità di gestire un singolo movimento.
  * Permette di accedere e modificare le informazioni associate al movimento:
  * descrizione, importo, account associato, lista dei tag associati al
  * movimento. Le operazioni di lettura e modifica di queste operazioni vengono
- * effettuate per mezzo degli opportuni getter e setter. Il movimento � associato
+ * effettuate per mezzo degli opportuni getter e setter. Il movimento è associato
  * ad una transazione da cui deriva la data. I tag inseriti nei movimenti vengono
  * raccolti senza ripetersi dalla transazione, i tag aggiunti alla transazione
  * vengono distribuiti a tutti i movimenti a lei associati

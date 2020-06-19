@@ -19,7 +19,10 @@ This file is part of JBudget.
 import java.util.Map;
 
 import com.google.common.base.Function;
-
+/**
+ * DISCLAIMER: Classe embrionale in via di sviluppo per la persistenza dei dati dell'applicazione
+ * @param <T> tipo elemento da memorizzare
+ */
 public class RegistryImpl<T> {
 
     private Map<Integer, T> registry;

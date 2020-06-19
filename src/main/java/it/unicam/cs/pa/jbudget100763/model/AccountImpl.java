@@ -115,7 +115,6 @@ public class AccountImpl implements Account {
 		for (Movement t : this.getMovements()) {
 			if (condition.test(t)) {
 				temp.add(t);
-
 			}
 		}
 		return temp;

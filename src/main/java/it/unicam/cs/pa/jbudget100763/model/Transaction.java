@@ -20,7 +20,7 @@ import java.util.GregorianCalendar;
 import java.util.Set;
 
 /**
- * questa interfaccia � implementata dalle classi che hanno la responsabilit�
+ * questa interfaccia è implementata dalle classi che hanno la responsabilità
  * di gestire una transazione. Permette di accedere e modificare la informazioni
  * associate ad una transazione: lista dei tag, data, movimento. Un tag
  * associato (o rimosso) ad una transazione viene aggiunto (o rimosso) ad ogni

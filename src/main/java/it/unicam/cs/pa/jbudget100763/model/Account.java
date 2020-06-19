@@ -20,7 +20,7 @@ import java.util.Set;
 import java.util.function.Predicate;
 
 /**
- * questa interfaccia � implementata dalle classi che hanno la responsabilit�
+ * questa interfaccia è implementata dalle classi che hanno la responsabilit�
  * di gestire un conto. Permette di accedere e modificare le informazioni del
  * conto: descrizione, saldo iniziale, tipologia. Consente inoltre di ottenere
  * il saldo attuale. Inoltre, � possibile accedere alla lista dei movimenti e

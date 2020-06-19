@@ -14,7 +14,8 @@ This file is part of JBudget.
 
     You should have received a copy of the GNU General Public License
     along with Foobar.  If not, see <https://www.gnu.org/licenses/>.
-*/package it.unicam.cs.pa.jbudget100763.view.javafx;
+*/
+package it.unicam.cs.pa.jbudget100763.view.javafx;
 
 import java.io.IOException;
 import java.net.URL;
@@ -39,9 +40,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
- * Ha la responsabilit� di caricare le schermate da avviare e raccogliere tutte
- * le interazioni dell'utente tramite la javaFX GUI e di inoltrarle al
- * controller dell'applicazione
+ * Ha la responsabilità di avviare gestire la schermata di avvio dell'applicazione JAVAFX
+ * 
+ * 
  * 
  * @author Vittorio
  *
@@ -123,8 +124,8 @@ public class FxController implements Initializable, View {
 		accountTable.setItems(getAccounts());
 
 	}
-	
-	private void createTagTable() throws IOException{
+
+	private void createTagTable() throws IOException {
 		tagName.setCellValueFactory(new PropertyValueFactory<Tag, String>("name"));
 		tagDescription.setCellValueFactory(new PropertyValueFactory<Tag, String>("description"));
 		tagTable.setItems(getTags());
@@ -164,7 +165,6 @@ public class FxController implements Initializable, View {
 
 	}
 
-
 	@FXML
 	public void deleteAccount() {
 		controller.removeAccount(accountTable.getSelectionModel().getSelectedItem());
@@ -172,12 +172,12 @@ public class FxController implements Initializable, View {
 
 	}
 
-
 	private ObservableList<Tag> getTags() throws IOException {
 		ObservableList<Tag> observableList = FXCollections.observableArrayList();
 		observableList.addAll(controller.getTags());
 		return observableList;
 	}
+
 	/**
 	 * tag table management
 	 */
@@ -203,13 +203,11 @@ public class FxController implements Initializable, View {
 	@FXML
 	private TableColumn<Tag, String> tagDescription = new TableColumn<Tag, String>();
 
-	
-
 	@FXML
 	private void deleteTag() {
 		controller.getTags().removeIf(o -> o == tagTable.getSelectionModel().getSelectedItem());
 		tagTable.getItems().removeAll(tagTable.getSelectionModel().getSelectedItem());
 
 	}
-	
+
 }

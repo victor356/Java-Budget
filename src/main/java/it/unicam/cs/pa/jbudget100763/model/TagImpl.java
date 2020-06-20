@@ -16,8 +16,6 @@ This file is part of JBudget.
 */
 package it.unicam.cs.pa.jbudget100763.model;
 
-import java.util.Map;
-
 /**
  * ha la responsabilità di definire una categoria di spesa/guadagno.
  * 
@@ -30,16 +28,6 @@ public class TagImpl implements Tag {
 	private String name;
 	private String description;
 
-	private static Map<Integer, AccountImpl>registry;
-
-	public static AccountImpl getInstance(int id) {
-		if (registry.containsKey(id)) {
-			return registry.get(id);
-		} else {
-			return new AccountImpl(id);
-		}
-
-	}
 
 	public int getId() {
 		return this.id;

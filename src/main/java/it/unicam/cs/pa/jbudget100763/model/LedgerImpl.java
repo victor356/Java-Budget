@@ -92,7 +92,9 @@ public class LedgerImpl implements Ledger {
 
 		tags.remove(t);
 	}
-
+	/**
+	 * crea una nuova transazione e la inserisce nella lista dell'applicazione
+	 */
 	public boolean addTransaction(GregorianCalendar date) {
 		return transactions.add(new TransactionImpl(date));
 	}

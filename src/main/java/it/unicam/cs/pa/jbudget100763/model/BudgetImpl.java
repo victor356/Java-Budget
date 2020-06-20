@@ -49,7 +49,7 @@ public class BudgetImpl implements Budget {
 	}
 
 	/**
-	 * aggiunge un nuovo tag e relativo accantonamento al report
+	 * aggiunge un nuovo tag e relativo accantonamento previsto, al report
 	 */
 	@Override
 	public void setBalance(Tag t, Double expected) {

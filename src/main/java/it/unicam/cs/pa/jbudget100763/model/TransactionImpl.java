@@ -37,18 +37,9 @@ public class TransactionImpl implements Transaction {
 	private Set<Movement> movements = new HashSet<Movement>();
 	private GregorianCalendar date;
 
-	/*
-	 * public static RegistryImpl<TransactionImpl> getRegistry(){ return new
-	 * RegistryImpl<>(TransactionImpl::new); }
-	 */
-
-	/**
-	 * La classe viene inserita automaticamente nella lista del ledger -- da
-	 * rimuovere
-	 */
-	public TransactionImpl( GregorianCalendar date) {
+	public TransactionImpl(GregorianCalendar date) {
 		this.date = date;
-		
+
 	}
 
 	public int getId() {
@@ -82,7 +73,7 @@ public class TransactionImpl implements Transaction {
 	}
 
 	/**
-	 * @return Get a distinct tags list from all the movements
+	 * @return Get the distinct tags list from all the movements
 	 */
 	public Set<Tag> getTags() {
 		Set<Tag> tags = new HashSet<Tag>();
@@ -103,9 +94,8 @@ public class TransactionImpl implements Transaction {
 	 */
 	@Override
 	public void addTag(Tag t) {
-		movements.parallelStream().forEach(m -> {
-			if (!m.getTag().contains((Tag) t))
-				m.addTag(t);
+		movements.forEach(m -> {
+			m.addTag(t);
 		});
 
 	}

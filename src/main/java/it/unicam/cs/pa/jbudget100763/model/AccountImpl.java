@@ -18,7 +18,6 @@ package it.unicam.cs.pa.jbudget100763.model;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.Map;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -28,7 +27,7 @@ import java.util.stream.Collectors;
  * 
  *         Permette di accedere e modificare le informazioni del conto:
  *         descrizione, saldo iniziale, tipologia. Consente inoltre di ottenere
- *         il saldo attuale a runtime. Inoltre, è possibile accedere alla lista
+ *         il saldo attuale. Inoltre, è possibile accedere alla lista
  *         dei movimenti associati e quelli che soddisfano un determinato
  *         predicato.
  */

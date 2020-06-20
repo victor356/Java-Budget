@@ -6,13 +6,13 @@ This file is part of JBudget.
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
 
-    Foobar is distributed in the hope that it will be useful,
+    JBudget is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with Foobar.  If not, see <https://www.gnu.org/licenses/>.
+    along with JBudget.  If not, see <https://www.gnu.org/licenses/>.
 */
 package it.unicam.cs.pa.jbudget100763.model;
 
@@ -27,7 +27,7 @@ import java.util.Set;
  * movimento. Le operazioni di lettura e modifica di queste operazioni vengono
  * effettuate per mezzo degli opportuni getter e setter. Il movimento è associato
  * ad una transazione da cui deriva la data. I tag inseriti nei movimenti vengono
- * raccolti senza ripetersi dalla transazione, i tag aggiunti alla transazione
+ * raccolti dalla transazione senza ripetersi , i tag aggiunti alla transazione
  * vengono distribuiti a tutti i movimenti a lei associati
  * 
  * @author Vittorio

@@ -6,13 +6,13 @@ This file is part of JBudget.
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
 
-    Foobar is distributed in the hope that it will be useful,
+    JBudget is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with Foobar.  If not, see <https://www.gnu.org/licenses/>.
+    along with JBudget.  If not, see <https://www.gnu.org/licenses/>.
 */
 package it.unicam.cs.pa.jbudget100763.model;
 
@@ -59,7 +59,7 @@ public class BudgetImpl implements Budget {
 	/**
 	 * 
 	 * @param condition - Predicate da rispettare
-	 * @return i tag utilizzati nelle transazioni che rispettano una certa
+	 * @return ritorna i tag utilizzati nelle transazioni che rispettano una certa
 	 *         condizione (es: avvenute in un determinato periodo di tempo)
 	 */
 	@Override
@@ -90,7 +90,6 @@ public class BudgetImpl implements Budget {
 	 * @return lambda expression per definire una transazione avvenuta prima della
 	 *         certa data
 	 */
-
 	@Override
 	public Predicate<Transaction> before(GregorianCalendar date) {
 		return (transaction -> transaction.getDate().before(date));

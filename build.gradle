@@ -12,14 +12,13 @@ plugins {
 }
 mainClassName= 'it.unicam.cs.pa.jbudget100763.Main'
 repositories {
-    // Use jcenter for resolving dependencies.
-    // You can declare any Maven/Ivy/file repository here.
+   
     jcenter()
     mavenCentral()
 }
 
 dependencies {
-    // This dependency is exported to consumers, that is to say found on their compile classpath.
+   
 
     // This dependency is used internally, and not exposed to consumers on their own compile classpath.
     implementation 'com.google.guava:guava:28.2-jre', 'com.google.code.gson:gson:2.8.6'
@@ -47,3 +46,6 @@ apply plugin: 'java'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
+task myJavadocs(type: Javadoc) {
+  source = javadoc
+}

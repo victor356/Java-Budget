@@ -6,13 +6,13 @@ This file is part of JBudget.
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
 
-    Foobar is distributed in the hope that it will be useful,
+    JBudget is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with Foobar.  If not, see <https://www.gnu.org/licenses/>.
+    along with JBudget.  If not, see <https://www.gnu.org/licenses/>.
 */
 package it.unicam.cs.pa.jbudget100763.model;
 
@@ -20,6 +20,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Map;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * 
@@ -47,8 +48,9 @@ public class AccountImpl implements Account {
 		this.description = description2;
 
 	}
-	public AccountImpl(int id){
-		this.id=id;
+
+	public AccountImpl(int id) {
+		this.id = id;
 	}
 
 	/**
@@ -85,8 +87,8 @@ public class AccountImpl implements Account {
 	}
 
 	/**
-	 * I movimenti correlati a questo account hanno il riferimento nelle transazioni (e
-	 * quindi nel ledger), successivamente questi vengono collegati all'account
+	 * I movimenti correlati a questo account hanno il riferimento nelle transazioni
+	 * (e quindi nel ledger), successivamente questi vengono collegati all'account
 	 * 
 	 * @return ritorna la lista dei movimenti che si riferiscono a questo account
 	 */
@@ -110,14 +112,7 @@ public class AccountImpl implements Account {
 	 */
 	@Override
 	public Set<Movement> getMovements(Predicate<Movement> condition) {
-		Set<Movement> temp = new HashSet<Movement>();
-
-		for (Movement t : this.getMovements()) {
-			if (condition.test(t)) {
-				temp.add(t);
-			}
-		}
-		return temp;
+		return this.getMovements().stream().filter(condition).collect(Collectors.toSet());
 	}
 
 	public String getName() {

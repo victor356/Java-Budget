@@ -6,13 +6,13 @@ This file is part of JBudget.
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
 
-    Foobar is distributed in the hope that it will be useful,
+    JBudget is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with Foobar.  If not, see <https://www.gnu.org/licenses/>.
+    along with JBudget.  If not, see <https://www.gnu.org/licenses/>.
 */
 package it.unicam.cs.pa.jbudget100763.model;
 
@@ -20,6 +20,7 @@ import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * ha la responsabilità di gestire tutti i dati dell'applicazione. è
@@ -37,14 +38,14 @@ public class LedgerImpl implements Ledger {
 	Set<Tag> tags = new HashSet<Tag>();
 	Set<ScheduledTransaction> scheduledTransaction = new HashSet<ScheduledTransaction>();
 
-	private static LedgerImpl ledger;
+	private static Ledger ledger;
 
 	/**
 	 * Singleton implementation
 	 * 
 	 * @return ledger
 	 */
-	public static LedgerImpl getInstance() {
+	public static Ledger getInstance() {
 		if (ledger == null) {
 			return ledger = new LedgerImpl();
 		}
@@ -114,15 +115,7 @@ public class LedgerImpl implements Ledger {
 	 * @return ritorna la lista di transazioni che rispettano un certo predicato
 	 */
 	public Set<Transaction> getTransactions(Predicate<Transaction> condition) {
-		Set<Transaction> temp = new HashSet<Transaction>();
-
-		for (Transaction t : this.getTransactions()) {
-			if (condition.test(t)) {
-				temp.add(t);
-
-			}
-		}
-		return temp;
+		return transactions.stream().filter(condition).collect(Collectors.toSet());
 	}
 
 	/**
@@ -136,11 +129,10 @@ public class LedgerImpl implements Ledger {
 	/**
 	 * 
 	 * @param d data in input
-	 * @return la specifica scheduled transaction fissata a quella data
+	 * @return le scheduled transaction fissate a quella data
 	 */
-	public ScheduledTransaction searchScheduledTransaction(GregorianCalendar d) {
-		return scheduledTransaction.stream().filter((ScheduledTransaction st) -> st.getDate() == d).findAny()
-				.orElse(null);
+	public Set<ScheduledTransaction> searchScheduledTransaction(GregorianCalendar d) {
+		return scheduledTransaction.stream().filter((ScheduledTransaction st) -> st.getDate() == d).collect(Collectors.toSet());
 	}
 
 	/**
@@ -155,7 +147,7 @@ public class LedgerImpl implements Ledger {
 	}
 
 	/**
-	 * Combina (aggiunge) una transazione prevista ad una data futura con una
+	 * Combina (aggiunge) tutte le transazioni previste ad una data futura con una
 	 * scheduled transaction
 	 *
 	 * @param st - scheduler di riferimento

@@ -6,13 +6,13 @@ This file is part of JBudget.
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
 
-    Foobar is distributed in the hope that it will be useful,
+    JBudget is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with Foobar.  If not, see <https://www.gnu.org/licenses/>.
+    along with JBudget.  If not, see <https://www.gnu.org/licenses/>.
 */
 package it.unicam.cs.pa.jbudget100763.model;
 
@@ -20,7 +20,7 @@ import java.util.GregorianCalendar;
 import java.util.Set;
 
 /**
- * questa interfaccia � implementata dalle classi che hanno la responsabilit�
+ * questa interfaccia è implementata dalle classi che hanno la responsabilità
  * di gestire un singolo movimento. Permette di accedere e modificare le
  * informazioni associate al movimento: descrizione, importo, account associato,
  * lista dei tag associati al movimento. Le operazioni di lettura e modifica di

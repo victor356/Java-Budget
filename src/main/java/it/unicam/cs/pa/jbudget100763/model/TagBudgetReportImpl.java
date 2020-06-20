@@ -6,13 +6,13 @@ This file is part of JBudget.
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
 
-    Foobar is distributed in the hope that it will be useful,
+    JBudget is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with Foobar.  If not, see <https://www.gnu.org/licenses/>.
+    along with JBudget.  If not, see <https://www.gnu.org/licenses/>.
 */
 package it.unicam.cs.pa.jbudget100763.model;
 
@@ -35,7 +35,8 @@ public class TagBudgetReportImpl implements TagBudgetReport {
 
 	/**
 	 * @param transactions - lista delle transazioni da analizzare
-	 * @return report - saldo complessivo di ogni tag distinto trovato nelle transizioni in input
+	 * @return report - saldo complessivo di ogni distinto tag trovato nelle
+	 *         transizioni in input
 	 * 
 	 */
 	@Override
@@ -55,20 +56,19 @@ public class TagBudgetReportImpl implements TagBudgetReport {
 	 */
 	@Override
 	public Set<Tag> totalTags() {
+
 		return LedgerImpl.getInstance().getTags();
 	}
 
 	/**
 	 * @param condition - Predicate che le transazioni devono rispettare
-	 * @return ritorna il bilancio di tutti i tag, ovvero quelli trovati nelle
+	 * @return ritorna il bilancio di tutti i tag, ovvero di quelli trovati nelle
 	 *         transazioni che rispettano il Predicato
 	 */
 	@Override
-	public  Map<Tag, Double> report(Predicate<Transaction> condition) {
+	public Map<Tag, Double> report(Predicate<Transaction> condition) {
 
-		Set<Transaction> temp = LedgerImpl.getInstance().getTransactions(condition);
-
-		return getTagBalance(temp);
+		return getTagBalance(LedgerImpl.getInstance().getTransactions(condition));
 	}
 
 }

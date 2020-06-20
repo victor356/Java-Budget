@@ -6,13 +6,13 @@ This file is part of JBudget.
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
 
-    Foobar is distributed in the hope that it will be useful,
+    JBudget is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with Foobar.  If not, see <https://www.gnu.org/licenses/>.
+    along with JBudget.  If not, see <https://www.gnu.org/licenses/>.
 */
 package it.unicam.cs.pa.jbudget100763.model;
 
@@ -29,6 +29,7 @@ import java.util.function.Predicate;
  */
 public interface Ledger {
 
+    
 	Set<Account> getAccounts();
 
 	Set<Transaction> getTransactions();
@@ -47,6 +48,12 @@ public interface Ledger {
 
 	void schedule(ScheduledTransaction st);
 
-	Account addAccount(AccountType cash, String string, String string2, double d);
+    Account addAccount(AccountType cash, String string, String string2, double d);
+
+    Set<ScheduledTransaction> getScheduled();
+
+    Set<ScheduledTransaction> searchScheduledTransaction(GregorianCalendar d);
+
+    boolean scheduleSpecificTransaction(Transaction transaction, ScheduledTransaction st);
 
 }

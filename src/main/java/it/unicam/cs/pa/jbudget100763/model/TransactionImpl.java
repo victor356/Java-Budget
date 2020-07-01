@@ -1,3 +1,19 @@
+/*
+This file is part of JBudget.
+
+    JBudget is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    JBudget is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with JBudget.  If not, see <https://www.gnu.org/licenses/>.
+*/
 package it.unicam.cs.pa.jbudget100763.model;
 
 import java.util.HashSet;
@@ -21,14 +37,9 @@ public class TransactionImpl implements Transaction {
 	private Set<Movement> movements = new HashSet<Movement>();
 	private GregorianCalendar date;
 
-	/**
-	 * La classe viene inserita automaticamente nella lista del ledger -- da
-	 * rimuovere
-	 */
-	public TransactionImpl( GregorianCalendar date) {
+	public TransactionImpl(GregorianCalendar date) {
 		this.date = date;
-		this.id=date.hashCode();
-		
+
 	}
 
 	public int getId() {
@@ -62,7 +73,7 @@ public class TransactionImpl implements Transaction {
 	}
 
 	/**
-	 * @return Get a distinct tags list from all the movements
+	 * @return Get the distinct tags list from all the movements
 	 */
 	public Set<Tag> getTags() {
 		Set<Tag> tags = new HashSet<Tag>();
@@ -83,9 +94,8 @@ public class TransactionImpl implements Transaction {
 	 */
 	@Override
 	public void addTag(Tag t) {
-		movements.parallelStream().forEach(m -> {
-			if (!m.getTag().contains((Tag) t))
-				m.addTag(t);
+		movements.forEach(m -> {
+			m.addTag(t);
 		});
 
 	}

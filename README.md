@@ -1,2 +1,4 @@
 # PA2020
- giugno
+Vittorio Rinaldi
+
+GNU LICENCE

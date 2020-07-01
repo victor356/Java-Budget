@@ -1,3 +1,19 @@
+/*
+This file is part of JBudget.
+
+    JBudget is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    JBudget is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with JBudget.  If not, see <https://www.gnu.org/licenses/>.
+*/
 package it.unicam.cs.pa.jbudget100763.view.javafx;
 
 import java.io.IOException;
@@ -18,7 +34,13 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+/**
+ * Gestisce i metodi chiamati dalla schermata di creazione di un conto,
+ * indirizzandoli al controller MVC
+ */
 public class AccountController implements Initializable {
+    private Controller controller = new Controller();
+
     @FXML
     private TextField accountNameField = new TextField();
 
@@ -36,8 +58,6 @@ public class AccountController implements Initializable {
 
     @FXML
     private Button closeButton;
-
-    private Controller controller = new Controller();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -63,8 +83,8 @@ public class AccountController implements Initializable {
 
     public void addAccount(ActionEvent actionEvent) throws IOException {
         if (accountOpeningBalanceField.getText().isEmpty()) {
-			throw new IllegalArgumentException("Inserire cifra iniziale!!!!");
-		}
+            throw new IllegalArgumentException("Inserire cifra iniziale!!!!");
+        }
         controller.addAccount(accountTypeField.getValue(), accountNameField.getText(),
                 accountDescriptionField.getText(), Double.parseDouble(accountOpeningBalanceField.getText()));
 

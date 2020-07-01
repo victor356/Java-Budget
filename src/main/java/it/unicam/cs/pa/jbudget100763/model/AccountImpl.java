@@ -1,9 +1,25 @@
+/*
+This file is part of JBudget.
+
+    JBudget is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    JBudget is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with JBudget.  If not, see <https://www.gnu.org/licenses/>.
+*/
 package it.unicam.cs.pa.jbudget100763.model;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.Map;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * 
@@ -11,7 +27,7 @@ import java.util.function.Predicate;
  * 
  *         Permette di accedere e modificare le informazioni del conto:
  *         descrizione, saldo iniziale, tipologia. Consente inoltre di ottenere
- *         il saldo attuale a runtime. Inoltre, � possibile accedere alla lista
+ *         il saldo attuale. Inoltre, è possibile accedere alla lista
  *         dei movimenti associati e quelli che soddisfano un determinato
  *         predicato.
  */
@@ -31,18 +47,9 @@ public class AccountImpl implements Account {
 		this.description = description2;
 
 	}
-	public AccountImpl(int id){
-		this.id=id;
-	}
-	private static Map<Integer, AccountImpl>registry;
 
-	public static AccountImpl getInstance(int id) {
-		if (registry.containsKey(id)) {
-			return registry.get(id);
-		} else {
-			return new AccountImpl(id);
-		}
-
+	public AccountImpl(int id) {
+		this.id = id;
 	}
 
 	/**
@@ -79,8 +86,8 @@ public class AccountImpl implements Account {
 	}
 
 	/**
-	 * I movimenti correlati a questo account sono inclusi nelle transazioni (e
-	 * quindi nel ledger), successivamente questi vengono collegati all'account
+	 * I movimenti correlati a questo account hanno il riferimento nelle transazioni
+	 * (e quindi nel ledger), successivamente questi vengono collegati all'account
 	 * 
 	 * @return ritorna la lista dei movimenti che si riferiscono a questo account
 	 */
@@ -104,15 +111,7 @@ public class AccountImpl implements Account {
 	 */
 	@Override
 	public Set<Movement> getMovements(Predicate<Movement> condition) {
-		Set<Movement> temp = new HashSet<Movement>();
-
-		for (Movement t : this.getMovements()) {
-			if (condition.test(t)) {
-				temp.add(t);
-
-			}
-		}
-		return temp;
+		return this.getMovements().stream().filter(condition).collect(Collectors.toSet());
 	}
 
 	public String getName() {

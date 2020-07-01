@@ -1,6 +1,20 @@
-package it.unicam.cs.pa.jbudget100763.model;
+/*
+This file is part of JBudget.
 
-import java.util.Map;
+    JBudget is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    JBudget is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with JBudget.  If not, see <https://www.gnu.org/licenses/>.
+*/
+package it.unicam.cs.pa.jbudget100763.model;
 
 /**
  * ha la responsabilità di definire una categoria di spesa/guadagno.
@@ -14,16 +28,6 @@ public class TagImpl implements Tag {
 	private String name;
 	private String description;
 
-	private static Map<Integer, AccountImpl>registry;
-
-	public static AccountImpl getInstance(int id) {
-		if (registry.containsKey(id)) {
-			return registry.get(id);
-		} else {
-			return new AccountImpl(id);
-		}
-
-	}
 
 	public int getId() {
 		return this.id;

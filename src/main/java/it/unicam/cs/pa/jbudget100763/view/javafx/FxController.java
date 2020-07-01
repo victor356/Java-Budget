@@ -1,3 +1,19 @@
+/*
+This file is part of JBudget.
+
+    JBudget is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    JBudget is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with JBudget.  If not, see <https://www.gnu.org/licenses/>.
+*/
 package it.unicam.cs.pa.jbudget100763.view.javafx;
 
 import java.io.IOException;
@@ -8,11 +24,8 @@ import java.util.ResourceBundle;
 
 import it.unicam.cs.pa.jbudget100763.controller.Controller;
 import it.unicam.cs.pa.jbudget100763.model.Account;
-import it.unicam.cs.pa.jbudget100763.model.AccountImpl;
 import it.unicam.cs.pa.jbudget100763.model.AccountType;
-import it.unicam.cs.pa.jbudget100763.model.LedgerImpl;
 import it.unicam.cs.pa.jbudget100763.model.Tag;
-import it.unicam.cs.pa.jbudget100763.model.TagImpl;
 import it.unicam.cs.pa.jbudget100763.view.View;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,12 +37,11 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
 
 /**
- * Ha la responsabilit� di caricare le schermate da avviare e raccogliere tutte
- * le interazioni dell'utente tramite la javaFX GUI e di inoltrarle al
- * controller dell'applicazione
+ * Ha la responsabilità di avviare gestire la schermata di avvio dell'applicazione JAVAFX
+ * 
+ * 
  * 
  * @author Vittorio
  *
@@ -111,8 +123,8 @@ public class FxController implements Initializable, View {
 		accountTable.setItems(getAccounts());
 
 	}
-	
-	private void createTagTable() throws IOException{
+
+	private void createTagTable() throws IOException {
 		tagName.setCellValueFactory(new PropertyValueFactory<Tag, String>("name"));
 		tagDescription.setCellValueFactory(new PropertyValueFactory<Tag, String>("description"));
 		tagTable.setItems(getTags());
@@ -152,7 +164,6 @@ public class FxController implements Initializable, View {
 
 	}
 
-
 	@FXML
 	public void deleteAccount() {
 		controller.removeAccount(accountTable.getSelectionModel().getSelectedItem());
@@ -160,12 +171,12 @@ public class FxController implements Initializable, View {
 
 	}
 
-
 	private ObservableList<Tag> getTags() throws IOException {
 		ObservableList<Tag> observableList = FXCollections.observableArrayList();
 		observableList.addAll(controller.getTags());
 		return observableList;
 	}
+
 	/**
 	 * tag table management
 	 */
@@ -191,13 +202,11 @@ public class FxController implements Initializable, View {
 	@FXML
 	private TableColumn<Tag, String> tagDescription = new TableColumn<Tag, String>();
 
-	
-
 	@FXML
 	private void deleteTag() {
 		controller.getTags().removeIf(o -> o == tagTable.getSelectionModel().getSelectedItem());
 		tagTable.getItems().removeAll(tagTable.getSelectionModel().getSelectedItem());
 
 	}
-	
+
 }

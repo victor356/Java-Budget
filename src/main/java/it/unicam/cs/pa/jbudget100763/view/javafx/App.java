@@ -1,10 +1,25 @@
+/*
+This file is part of JBudget.
+
+    JBudget is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    JBudget is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with JBudget.  If not, see <https://www.gnu.org/licenses/>.
+*/
 package it.unicam.cs.pa.jbudget100763.view.javafx;
 
 import java.io.IOException;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
@@ -16,12 +31,12 @@ import javafx.stage.Stage;
  * @author Vittorio
  *
  */
-public class App extends Application  {
+public class App extends Application {
 	private static Stage primaryStage;
 	private static BorderPane mainLayout;
 
 	/**
-	 * Ha il compito di aprire la schermata d'avvio dell'applicazione
+	 * Ha il compito di avviare l'applicazione
 	 */
 	@Override
 	public void start(Stage stage) throws IOException {
@@ -35,7 +50,8 @@ public class App extends Application  {
 	/**
 	 * Ha il compito di aprire la schermata principale dell'applicazione
 	 * 
-	 * @throws IOException
+	 * @throws IOException se non viene inserito un parametro adeguato nella
+	 *                     schermata
 	 */
 	public static void showHome() throws IOException {
 
@@ -48,7 +64,8 @@ public class App extends Application  {
 	 * Ha il compito di aprire la schermata in cui sono riassunte le funzioni del
 	 * ledger
 	 * 
-	 * @throws IOException
+	 * @throws IOException se non viene inserito un parametro adeguato nella
+	 *                     schermata
 	 */
 	public static void showStart() throws IOException {
 
@@ -60,7 +77,8 @@ public class App extends Application  {
 	 * Ha il compito di aprire la schermata dove è riassunta la gestione
 	 * dell'account
 	 * 
-	 * @throws IOException
+	 * @throws IOException se non viene inserito un parametro adeguato nella
+	 *                     schermata
 	 */
 	public static void manageAccount() throws IOException {
 
@@ -71,35 +89,30 @@ public class App extends Application  {
 		addDialogStage.initOwner(primaryStage);
 		addDialogStage.setScene(new Scene(mainLayout));
 		addDialogStage.showAndWait();
-		}
-/**
- * Creazione schermata per creare un account
- * @throws IOException
- */
+	}
+
+	/**
+	 * Creazione schermata per creare un account
+	 * 
+	 * @throws IOException se non viene inserito un parametro adeguato nella
+	 *                     schermata
+	 */
 	public static void createAccount() throws IOException {
 		Stage addDialogStage = new Stage();
 
-	 	mainLayout = FXMLLoader.load(App.class.getResource("/newAccount.fxml"));
-	addDialogStage.setTitle("Add New Account");
-	addDialogStage.initModality(Modality.WINDOW_MODAL);
-	addDialogStage.initOwner(primaryStage);
-	addDialogStage.setScene(new Scene(mainLayout));
-	addDialogStage.showAndWait();
-	
-/* 
-		FXMLLoader loader = new FXMLLoader(App.class.getResource("/newAccount.fxml"));
-		Parent root = loader.load();
-        addDialogStage.setResizable(false);
-        addDialogStage.setScene(new Scene(root));
-        addDialogStage.setTitle("Account");
-        addDialogStage.showAndWait(); */
-		}
-	
-	
+		mainLayout = FXMLLoader.load(App.class.getResource("/newAccount.fxml"));
+		addDialogStage.setTitle("Add New Account");
+		addDialogStage.initModality(Modality.WINDOW_MODAL);
+		addDialogStage.initOwner(primaryStage);
+		addDialogStage.setScene(new Scene(mainLayout));
+		addDialogStage.showAndWait();
+	}
+
 	/**
-	 * Ha il compito di aprire la schermata dove � riassunta la gestione
-	 * dei tag
-	 * @throws IOException
+	 * Ha il compito di aprire la schermata dove è riassunta la gestione dei tag
+	 * 
+	 * @throws IOException se non viene inserito un parametro adeguato nella
+	 *                     schermata
 	 */
 	public static void manageTag() throws IOException {
 
@@ -111,10 +124,13 @@ public class App extends Application  {
 		addDialogStage.setScene(new Scene(mainLayout));
 		addDialogStage.showAndWait();
 	}
-/**
- * Ha il compito di aprire la schermata dove si crea un nuovo tag
- * @throws IOException
- */
+
+	/**
+	 * Ha il compito di aprire la schermata dove si crea un nuovo tag
+	 * 
+	 * @throws IOException se non viene inserito un parametro adeguato nella
+	 *                     schermata
+	 */
 	public static void createTag() throws IOException {
 
 		mainLayout = FXMLLoader.load(App.class.getResource("/newTag.fxml"));

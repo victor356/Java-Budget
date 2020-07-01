@@ -15,7 +15,6 @@ import it.unicam.cs.pa.jbudget100763.model.MovementType;
 import it.unicam.cs.pa.jbudget100763.model.Tag;
 import it.unicam.cs.pa.jbudget100763.model.TagImpl;
 import it.unicam.cs.pa.jbudget100763.model.Transaction;
-import it.unicam.cs.pa.jbudget100763.model.TransactionImpl;
 
 public class TransactionTest {
 	Ledger l = LedgerImpl.getInstance();

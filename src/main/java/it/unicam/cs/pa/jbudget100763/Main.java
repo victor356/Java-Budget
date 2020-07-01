@@ -6,12 +6,15 @@ import javafx.application.Application;
 
 public class Main  {
 	
+
 	 private static void launchGui() {
 	        Application.launch(App.class);
 	    }
 
 	 public static void main(String[] args) {
 		 launchGui();
+		
 		}
+
 
 }

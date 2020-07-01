@@ -8,11 +8,13 @@ import java.util.function.Predicate;
 
 import it.unicam.cs.pa.jbudget100763.model.Account;
 import it.unicam.cs.pa.jbudget100763.model.AccountType;
+import it.unicam.cs.pa.jbudget100763.model.Budget;
 import it.unicam.cs.pa.jbudget100763.model.BudgetImpl;
 import it.unicam.cs.pa.jbudget100763.model.LedgerImpl;
 import it.unicam.cs.pa.jbudget100763.model.ScheduledTransaction;
 import it.unicam.cs.pa.jbudget100763.model.ScheduledTransactionImpl;
 import it.unicam.cs.pa.jbudget100763.model.Tag;
+import it.unicam.cs.pa.jbudget100763.model.TagBudgetReport;
 import it.unicam.cs.pa.jbudget100763.model.TagBudgetReportImpl;
 import it.unicam.cs.pa.jbudget100763.model.Transaction;
 
@@ -21,12 +23,12 @@ import it.unicam.cs.pa.jbudget100763.model.Transaction;
  * modificando lo stato degli altri due componenti del MVC
  * 
  * @author Vittorio
- *
+ *gradl
  */
 public class Controller {
-	private TagBudgetReportImpl tagBudgetReport;
-	private BudgetImpl budgetImpl;
-
+	private TagBudgetReport tagBudgetReport= new TagBudgetReportImpl();
+	private Budget budgetImpl= new BudgetImpl();
+	
 	public Account addAccount(AccountType type, String name, String description, double openingBalance) {
 
 		if (name.isEmpty()) {

@@ -21,17 +21,13 @@ public class TransactionImpl implements Transaction {
 	private Set<Movement> movements = new HashSet<Movement>();
 	private GregorianCalendar date;
 
-	/*
-	 * public static RegistryImpl<TransactionImpl> getRegistry(){ return new
-	 * RegistryImpl<>(TransactionImpl::new); }
-	 */
-
 	/**
 	 * La classe viene inserita automaticamente nella lista del ledger -- da
 	 * rimuovere
 	 */
 	public TransactionImpl( GregorianCalendar date) {
 		this.date = date;
+		this.id=date.hashCode();
 		
 	}
 

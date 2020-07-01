@@ -3,7 +3,7 @@ package it.unicam.cs.pa.jbudget100763.model;
 import java.util.Map;
 
 /**
- * ha la responsabilit� di definire una categoria di spesa/guadagno.
+ * ha la responsabilità di definire una categoria di spesa/guadagno.
  * 
  * @author Vittorio
  *

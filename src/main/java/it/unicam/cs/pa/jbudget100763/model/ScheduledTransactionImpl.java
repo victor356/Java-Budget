@@ -78,6 +78,6 @@ public class ScheduledTransactionImpl implements ScheduledTransaction {
 	 */
 	public boolean addTransaction(Transaction t) {
 
-		return (t.getDate() == getDate() ? this.trans.add(t) : false);
+		return (t.getDate() == getDate() ? getTransactions().add(t) : false);
 	}
 }

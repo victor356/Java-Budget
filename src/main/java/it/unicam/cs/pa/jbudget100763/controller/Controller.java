@@ -38,7 +38,7 @@ import it.unicam.cs.pa.jbudget100763.model.Transaction;
  * modificando lo stato del Model
  * 
  * @author Vittorio
- *
+ *gradl
  */
 public class Controller {
 	private TagBudgetReport tagBudgetReport;

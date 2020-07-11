@@ -79,7 +79,7 @@ public class TransactionImpl implements Transaction {
 		Set<Tag> tags = new HashSet<Tag>();
 
 		movements.parallelStream().forEach(mov -> {
-			mov.getTag().parallelStream().forEach(tag -> {
+			mov.getTag().forEach(tag -> {
 				if (!tags.contains(tag))
 					tags.add(tag);
 			});

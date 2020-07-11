@@ -44,7 +44,7 @@ public class TagBudgetReportImpl implements TagBudgetReport {
 		Map<Tag, Double> report = new HashMap<Tag, Double>();
 
 		for (Tag ta : totalTags()) {
-			double result = transactions.parallelStream().filter(w -> w.getTags().contains((Tag) ta))
+			double result = transactions.stream().filter(w -> w.getTags().contains((Tag) ta))
 					.mapToDouble(x -> x.getTotalAmount()).sum();
 			report.putIfAbsent(ta, result);
 		}

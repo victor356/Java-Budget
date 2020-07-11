@@ -94,7 +94,7 @@ public class AccountImpl implements Account {
 	public Set<Movement> getMovements() {
 		Set<Movement> temp = new HashSet<Movement>();
 
-		ledger.getTransactions().parallelStream().forEach(transaction -> {
+		ledger.getTransactions().forEach(transaction -> {
 			transaction.getMovements().forEach(mov -> {
 				if (mov.getAccount().getName() == this.getName())
 					temp.add(mov);
